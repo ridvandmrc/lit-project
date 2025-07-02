@@ -1,0 +1,22 @@
+:root {
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+}
+
+.body-light {
+  --primary-color: #ca6716;
+  --text-color: #4c4444;
+  --text-white: #fff;
+  --disabled-color: #bdbdbd;
+  --font-family: 'Inter', sans-serif;
+}
+
+h1 {
+  font-size: 0;
+}
