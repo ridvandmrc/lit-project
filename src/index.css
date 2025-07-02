@@ -1,4 +1,26 @@
 :root {
+  --font-family: 'Inter', sans-serif;
+
+  --spacing-2xsm: 0.25rem;
+  --spacing-xsm: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.25rem;
+  --spacing-xl: 1.5rem;
+  --spacing-2xl: 2rem;
+
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  --font-size-sm: 0.5rem;
+  --font-size-md: 0.8rem;
+  --font-size-lg: 0.9rem;
+  --font-size-xl: 1.2rem;
+
+  --max-width: 1200px;
 }
 
 html {
@@ -7,14 +29,19 @@ html {
 
 body {
   margin: 0;
+  font-family: var(--font-family);
 }
 
 .body-light {
-  --primary-color: #ca6716;
+  --primary-color: #ff6201;
+  --secondary-color: #8216ca;
   --text-color: #4c4444;
   --text-white: #fff;
   --disabled-color: #bdbdbd;
-  --font-family: 'Inter', sans-serif;
+  --bg-white: #fff;
+  --border-color: #ebe8e8;
+
+  --main-bg: #f5f5f5;
 }
 
 h1 {

@@ -1,5 +1,4 @@
 import './typography';
-import '../../index.css';
 
 export default {
   title: 'Custom Components/Typography',
@@ -16,7 +15,7 @@ export default {
   },
   argTypes: {
     slot: 'text',
-    type: { type: 'select', options: ['header', 'p', 'caption'] },
+    type: { type: 'select', options: ['title', 'paragraph', 'caption'] },
     color: { type: 'select', options: ['primary', 'text', 'disabled'] },
   },
   parameters: {
@@ -34,7 +33,7 @@ Typography component for displaying text with different styles and colors.
 export const Typography = {
   args: {
     slot: 'Typography Component',
-    type: 'header',
+    type: 'title',
     color: 'primary',
   },
 };

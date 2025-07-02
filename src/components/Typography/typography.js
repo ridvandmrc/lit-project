@@ -1,11 +1,12 @@
 import { LitElement, css, html } from 'lit';
 
-const type = Object.freeze(['header', 'p', 'caption']);
+const type = Object.freeze(['title', 'subtitle', 'paragraph', 'caption', '']);
 const color = Object.freeze(['primary', 'text', 'disabled']);
 
 const elements = {
-  header: html`<h1><slot></slot></h1>`,
-  text: html`<p><slot></slot></p>`,
+  title: html`<h1><slot></slot></h1>`,
+  subtitle: html`<h6><slot></slot></h6>`,
+  paragraph: html`<p><slot></slot></p>`,
   caption: html`<span><slot></slot></span>`,
 };
 
@@ -19,7 +20,7 @@ const elements = {
 export class Typography extends LitElement {
   static get properties() {
     return {
-      type: { type: String }, // header | text | caption
+      type: { type: String }, // title | subtitle | paragraph | caption
       color: { type: String, reflect: true }, // primary | text | disabled
     };
   }
@@ -56,17 +57,22 @@ export class Typography extends LitElement {
         font-family: var(--font-family);
       }
 
-      :host(.header) {
-        font-size: 1rem;
+      :host(.title) {
+        font-size: var(--font-size-xl);
+        font-weight: 550;
       }
-      :host(.p) {
-        font-weight: 400;
-        font-size: 0.85rem;
+      :host(.subtitle) {
+        font-size: var(--font-size-lg);
+        font-weight: 550;
+      }
+      :host(.paragraph) {
+        font-weight: 500;
+        font-size: var(--font-size-md);
         line-height: 1.5;
-        letter-spacing: 0.00938em;
-      }      
+        letter-spacing: 1px;
+      }
       :host(.caption) {
-        font-size: 0.75rem;
+        font-size: var(--font-size-sm);
       }
 
       :host(.primary) {
@@ -77,6 +83,12 @@ export class Typography extends LitElement {
       }
       :host(.disabled) {
         color: var(--disabled-color);
+      }
+
+      h1,
+      h6,
+      p {
+        all: unset;
       }
     `;
   }
