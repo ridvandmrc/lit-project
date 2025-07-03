@@ -8,3 +8,5 @@ export * from './Table/tableCell.js';
 export * from './Table/tableGroup.js';
 export * from './IconButton/iconButton.js';
 export * from './Pagination/pagination.js';
+export * from './Card/card.js';
+export * from './PageLayout/pageLayout.js';
