@@ -10,3 +10,6 @@ export * from './IconButton/iconButton.js';
 export * from './Pagination/pagination.js';
 export * from './Card/card.js';
 export * from './PageLayout/pageLayout.js';
+export * from './Checkbox/checkbox.js';
+export * from './Input/input.js';
+export * from './Select/select.js';

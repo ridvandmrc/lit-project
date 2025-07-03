@@ -37,9 +37,12 @@ body {
   --secondary-color: #5055a0;
   --text-color: #4c4444;
   --text-white: #fff;
+  --label-color: #3f3f3f;
   --disabled-color: #bdbdbd;
   --bg-white: #fff;
+
   --border-color: #ebe8e8;
+  --input-border-color: #3f3f3f;
 
   --main-bg: #f5f5f5;
 }
