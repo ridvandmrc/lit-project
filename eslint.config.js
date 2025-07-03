@@ -15,6 +15,7 @@ export default [js.configs.recommended, {
       HTMLElement: 'readonly',
       customElements: 'readonly',
       process: 'readonly',
+      CustomEvent:'readonly'
     },
   },
   files: ['**/*.js'],

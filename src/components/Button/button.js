@@ -4,7 +4,7 @@ export class Button extends LitElement {
   static get properties() {
     return {
       variant: { type: String }, // contained | outlined | text
-      color: { type: String }, // primary | secondary | disabled
+      color: { type: String }, // primary | secondary | disabled | text-color
       size: { type: String }, // small | medium | large
       icon: { type: String }, // icon name for start icon
     };
@@ -31,12 +31,17 @@ export class Button extends LitElement {
 
   static get styles() {
     return css`
-      button {
-        cursor: pointer;
-        outline: none;
+      :host {
         border-radius: var(--radius-sm);
         display: inline-flex;
         align-items: center;
+      }
+      button {
+        cursor: pointer;
+        outline: none;
+        border-radius: inherit;
+        display: inherit;
+        align-items: inherit;
         gap: var(--spacing-2xsm);
       }
 
@@ -56,6 +61,12 @@ export class Button extends LitElement {
         color: var(--disabled-color);
         background-color: var(--disabled-color);
         border: 1px solid var(--disabled-color);
+      }
+
+      .text-color {
+        color: var(--text-color);
+        background-color: var(--text-color);
+        border: 1px solid var(--text-color);
       }
 
       .contained {

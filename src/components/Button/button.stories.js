@@ -20,7 +20,7 @@ export default {
   argTypes: {
     slot: 'text',
     variant: { type: 'select', options: ['contained', 'outlined', 'text'] }, // contained | outlined | text
-    color: { type: 'select', options: ['primary', 'secondary', 'disabled'] }, // primary | secondary | disabled
+    color: { type: 'select', options: ['primary', 'secondary', 'disabled','text-color'] }, // primary | secondary | disabled | text-color
     size: { type: 'select', options: ['small', 'medium', 'large'] }, // small | medium | large
     icon: {
       type: 'select',

@@ -6,6 +6,7 @@ export default class IconButton extends LitElement {
       icon: { type: String }, // icon name
       size: { type: String }, // small | medium | large
       color: { type: String }, // primary | secondary | disabled
+      disabled: { type: Boolean, reflect: true }, // button disabled state
     };
   }
 
@@ -14,11 +15,12 @@ export default class IconButton extends LitElement {
     this.icon = 'calendar';
     this.size = 'medium';
     this.color = 'primary';
+    this.disabled = false;
   }
 
   render() {
     return html`
-      <button class="${this.variant}">
+      <button class="${this.variant} ${this.disabled ? 'disabled' : ''}">
         <my-icon
           name="${this.icon}"
           color="${this.color}"
@@ -30,6 +32,9 @@ export default class IconButton extends LitElement {
 
   static get styles() {
     return css`
+      :host([disabled]) {
+        pointer-events: none;
+      }
       button {
         cursor: pointer;
         outline: none;

@@ -26,6 +26,8 @@ export default {
         'plus',
         'trash',
         'add-user',
+        'chevron-right',
+        'chevron-left',
       ],
     },
     color: {

@@ -7,3 +7,4 @@ export * from './Table/tableRow.js';
 export * from './Table/tableCell.js';
 export * from './Table/tableGroup.js';
 export * from './IconButton/iconButton.js';
+export * from './Pagination/pagination.js';
