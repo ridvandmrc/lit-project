@@ -13,13 +13,8 @@ class MySelect extends LitElement {
   constructor() {
     super();
     this.label = '';
-    this.value = { value: 'test1', label: 'Test' };
-    this.valueList = [
-      { value: 'test1', label: 'Test1' },
-      { value: 'test2', label: 'Test2' },
-      { value: 'test3', label: 'Test3' },
-      { value: 'test4', label: 'Test4' },
-    ];
+    this.value = {};
+    this.valueList = [];
     this.placeholder = 'Please enter Value';
   }
 
@@ -78,7 +73,7 @@ class MySelect extends LitElement {
         top: 8px;
         pointer-events: none;
         color: var(--icon-color);
-        transform:rotate(90deg);
+        transform: rotate(90deg);
       }
     `;
   }

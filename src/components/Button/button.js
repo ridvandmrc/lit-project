@@ -35,6 +35,9 @@ export class Button extends LitElement {
         border-radius: var(--radius-sm);
         display: inline-flex;
         align-items: center;
+        justify-content: center;
+        width: fit-content;
+        height: fit-content;
       }
       button {
         cursor: pointer;
@@ -42,7 +45,10 @@ export class Button extends LitElement {
         border-radius: inherit;
         display: inherit;
         align-items: inherit;
+        justify-content: inherit;
         gap: var(--spacing-2xsm);
+        width: inherit;
+        height: inherit;
       }
 
       .primary {

@@ -26,6 +26,7 @@ class MyInput extends LitElement {
         value=${this.value}
         type=${this.type}
         format
+        autocomplete="off"
         placeholder=${this.placeholder}
       />
     `;
