@@ -2,9 +2,9 @@ import { LitElement, html } from 'lit';
 
 export default class Content extends LitElement {
   render() {
-    /* return html` <my-employee></my-employee> `; */
-     /* return html`<my-add-employee></my-add-employee>`; */
-    return html`<my-add-employee
+    return html` <my-employee></my-employee> `;
+    /* return html`<my-add-employee></my-add-employee>`; */
+    /*     return html`<my-add-employee
       .userDetail=${{
         firstName: 'Ahmet 1',
         lastName: 'Sourtimes',
@@ -15,7 +15,7 @@ export default class Content extends LitElement {
         department: 'Engineering',
         position: 'junior',
       }}
-    ></my-add-employee>`;
+    ></my-add-employee>`; */
   }
 }
 

@@ -1,3 +1,14 @@
+export const userColumns = [
+  'firstName',
+  'lastName',
+  'employmentDate',
+  'birthDate',
+  'phone',
+  'email',
+  'department',
+  'position',
+];
+
 export const userData = [
   {
     firstName: 'Ahmet 1',

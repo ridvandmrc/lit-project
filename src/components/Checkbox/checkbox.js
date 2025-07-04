@@ -14,10 +14,24 @@ class MyCheckbox extends LitElement {
     this.checked = false;
   }
 
+  toggleChange(e) {
+    this.checked = e.target.checked;
+    this.dispatchEvent(
+      new CustomEvent('selectChange', {
+        detail: { checked: this.checked },
+      })
+    );
+  }
+
   render() {
     return html`
       <label for=${this.label}>
-        <input id=${this.label} type="checkbox" ?checked=${this.checked} />
+        <input
+          id=${this.label}
+          type="checkbox"
+          .checked=${this.checked}
+          @change=${(e) => this.toggleChange(e)}
+        />
         <span> ${this.label}</span>
       </label>
     `;
@@ -37,8 +51,8 @@ class MyCheckbox extends LitElement {
       input[type='checkbox'] {
         width: 1rem;
         height: 1rem;
-        accent-color: var(--primary-color); /* özelleştirilebilir */
         color: var(--text-color);
+        accent-color: var(--primary-color);
         border: 1px solid var(--border-color);
         border-radius: 4px;
       }

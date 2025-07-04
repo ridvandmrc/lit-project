@@ -44,6 +44,8 @@ body {
   --border-color: #ebe8e8;
   --input-border-color: #3f3f3f;
 
+  --table-selected-bg: rgba(255, 98, 1, 0.1);
+
   --main-bg: #f5f5f5;
 }
 

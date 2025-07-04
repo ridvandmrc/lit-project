@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { userData } from '../../data/index';
+import { userData, userColumns } from '../../data/index';
 
 const pageSize = 10; // Number of users per page
 
@@ -32,7 +32,23 @@ export default class Employee extends LitElement {
 
   updateView(view) {
     this.view = view;
-    console.log(`View updated to: ${view}`);
+  }
+
+  updateRowSelection(row, { checked }) {
+    row.selected = checked;
+    this.requestUpdate();
+  }
+
+  updateAllTableSelection({ checked }) {
+    this.data = this.data.map((user) => {
+      user.selected = checked;
+      return user;
+    });
+    this.requestUpdate();
+  }
+
+  checkAllSelected() {
+    return this.data.every((user) => user.selected);
   }
 
   render() {
@@ -95,14 +111,14 @@ export default class Employee extends LitElement {
           html` <my-card
             style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem"
           >
-            ${Object.entries(user).map(
-              ([key, value]) =>
+            ${userColumns.map(
+              (key) =>
                 html`<section>
                   <my-typography type="paragraph" color="disabled">
                     ${key}
                   </my-typography>
                   <my-typography type="subtitle" color="text">
-                    ${value}
+                    ${user[key]}
                   </my-typography>
                 </section> `
             )}
@@ -122,12 +138,18 @@ export default class Employee extends LitElement {
     return html`<my-table>
       <my-table-group>
         <my-table-row>
-          ${Object.keys(userData[0]).map(
+          <my-table-cell>
+            <my-checkbox
+              ?checked=${this.checkAllSelected()}
+              @selectChange=${(e) => this.updateAllTableSelection(e.detail)}
+            ></my-checkbox>
+          </my-table-cell>
+          ${userColumns.map(
             (userKey) =>
               html`<my-table-cell>
-                <my-typography type="subtitle" color="primary"
-                  >${userKey}</my-typography
-                >
+                <my-typography type="subtitle" color="primary">
+                  ${userKey}
+                </my-typography>
               </my-table-cell>`
           )}
           <my-table-cell>
@@ -140,12 +162,24 @@ export default class Employee extends LitElement {
       <my-table-group type="body">
         ${this.data.map(
           (user) =>
-            html`<my-table-row>
-              ${Object.values(user).map(
-                (userValue) =>
+            html`<my-table-row .selected=${user.selected}>
+              <my-table-cell>
+                <my-checkbox
+                  ?checked=${user.selected}
+                  @selectChange=${(e) =>
+                    this.updateRowSelection(user, e.detail)}
+                ></my-checkbox>
+              </my-table-cell>
+              ${userColumns.map(
+                (userKey) =>
                   html`<my-table-cell>
-                    <my-typography type="paragraph" color="text">
-                      ${userValue}
+                    <my-typography
+                      type=${userKey === 'firstName' || userKey === 'lastName'
+                        ? 'subtitle'
+                        : 'paragraph'}
+                      color="text"
+                    >
+                      ${user[userKey]}
                     </my-typography>
                   </my-table-cell>`
               )}
