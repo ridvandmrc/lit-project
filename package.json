@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "@vaadin/router": "^2.0.0",
-    "lit": "^3.3.0"
+    "lit": "^3.3.0",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.0.1",

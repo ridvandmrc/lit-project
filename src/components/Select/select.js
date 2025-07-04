@@ -18,11 +18,26 @@ class MySelect extends LitElement {
     this.placeholder = 'Please enter Value';
   }
 
+  onSelectionChange(e) {
+    this.dispatchEvent(
+      new CustomEvent('selectionChange', {
+        detail: {
+          value: e.target.value,
+          label: e.target.options[e.target.selectedIndex].text,
+        },
+      })
+    );
+  }
+
   render() {
     return html`
       <label for=${this.label}>${this.label}</label>
       <div class="input-wrapper">
-        <select id=${this.label} placeholder=${this.placeholder}>
+        <select
+          id=${this.label}
+          placeholder=${this.placeholder}
+          @input=${this.onSelectionChange}
+        >
           ${this.valueList.map(
             ({ label, value }) =>
               html`<option

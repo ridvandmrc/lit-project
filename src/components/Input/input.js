@@ -7,6 +7,7 @@ class MyInput extends LitElement {
       type: { type: String, reflect: true }, // text | password | email | number
       value: { type: String },
       placeholder: { type: String },
+      readonly: { type: Boolean, reflect: true },
     };
   }
 
@@ -16,6 +17,11 @@ class MyInput extends LitElement {
     this.type = 'text';
     this.value = '';
     this.placeholder = 'Please enter Value';
+    this.readonly = false;
+  }
+
+  update(changedProperties) {
+    super.update(changedProperties);
   }
 
   render() {
@@ -23,9 +29,15 @@ class MyInput extends LitElement {
       <label for=${this.label}>${this.label}</label>
       <input
         id=${this.label}
-        value=${this.value}
+        .value=${this.value}
         type=${this.type}
-        format
+        .readOnly=${this.readonly}
+        @input=${(e) => {
+          this.value = e.target.value;
+          this.dispatchEvent(
+            new CustomEvent('inputChange', { detail: this.value })
+          );
+        }}
         autocomplete="off"
         placeholder=${this.placeholder}
       />
@@ -55,6 +67,12 @@ class MyInput extends LitElement {
         font-size: var(--font-size-lg);
         color: var(--text-color);
         outline: none;
+      }
+
+      input:read-only {
+        pointer-events: none;
+        background-color: var(--disabled-color);
+        user-select: none;
       }
     `;
   }

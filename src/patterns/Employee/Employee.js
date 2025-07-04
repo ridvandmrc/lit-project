@@ -1,6 +1,14 @@
 import { LitElement, html, css } from 'lit';
-import { userData, userColumns } from '../../data/index';
+import { userColumns } from '../../data/index';
 import { Router } from '@vaadin/router';
+
+import {
+  useEmployeeStore,
+  employeeStore,
+  removeEmployee,
+  useTableStore,
+  updateView,
+} from '../../store';
 
 const pageSize = 10; // Number of users per page
 
@@ -17,22 +25,34 @@ export default class Employee extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.current = 1; // Default current page
-    this.total = +Math.ceil(userData.length / pageSize).toFixed(0); // Total number of users
-    this.data = userData.slice(0, pageSize); // Initial data slice
+    const { view } = useTableStore();
+    this.updatePage(1); // start from first page
+    this.view = view; // Default view
 
-    this.view = 'table'; // Default view
+    this.employeeSub = employeeStore.subscribe(() => {
+      this.updatePage(this.current); // Reset to first page on data change
+    });
+  }
+
+  disconnectedCallback() {
+    this.employeeSub();
   }
 
   updatePage(target) {
+    const { employee } = useEmployeeStore();
     this.current = target;
-    this.data = userData.slice(
-      (target - 1) * pageSize,
-      (target - 1) * pageSize + pageSize
+    this.total = +Math.ceil(employee.length / pageSize).toFixed(0); // Total number of users
+    if (this.current > this.total) {
+      this.current = this.total;
+    }
+    this.data = employee.slice(
+      (this.current - 1) * pageSize,
+      (this.current - 1) * pageSize + pageSize
     );
   }
 
   updateView(view) {
+    updateView(view);
     this.view = view;
   }
 
@@ -55,6 +75,10 @@ export default class Employee extends LitElement {
 
   onDeleteUser(user) {
     this.deleteUser = user;
+  }
+
+  proceedDeleteUser() {
+    removeEmployee(this.deleteUser.email);
   }
 
   onEditUser(user) {
@@ -94,6 +118,7 @@ export default class Employee extends LitElement {
         </section>
         <my-confirmation
           .open=${!!this.deleteUser?.firstName}
+          @proceed=${this.proceedDeleteUser}
           @cancel=${() => this.onDeleteUser(null)}
           message="Selected Employee record of ${this.deleteUser
             ?.firstName} will be deleted"

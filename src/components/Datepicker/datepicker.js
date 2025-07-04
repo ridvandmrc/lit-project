@@ -21,9 +21,21 @@ class MyDatepicker extends LitElement {
   getValue() {
     if (this.format === 'DD/MM/YYYY') {
       const [day, month, year] = this.value.split('/');
-      return `${year}-${month}-${day}`; 
+      return `${year}-${month}-${day}`;
     }
     return this.value;
+  }
+
+  onDateChange(e) {
+    const [year, month, day] = e.target.value.split('-');
+    this.dispatchEvent(
+      new CustomEvent('dateChange', {
+        detail:
+          this.format === 'DD/MM/YYYY'
+            ? `${day}/${month}/${year}`
+            : e.target.value,
+      })
+    );
   }
 
   render() {
@@ -35,6 +47,7 @@ class MyDatepicker extends LitElement {
           value=${this.getValue()}
           type="date"
           placeholder=${this.placeholder}
+          @input=${this.onDateChange}
         />
         <my-icon name="calendar"></my-icon>
       </div>
