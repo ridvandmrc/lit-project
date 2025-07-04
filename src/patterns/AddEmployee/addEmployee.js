@@ -1,10 +1,26 @@
+import { Router } from '@vaadin/router';
 import { LitElement, html, css } from 'lit';
+import { userData } from '../../data';
+import { AppRoutes } from '../../constants';
 
 export default class AddEmployee extends LitElement {
   static get properties() {
     return {
-      userDetail: { type: Object }, // user detail
+      userDetail: { type: Object, state: true }, // user detail
     };
+  }
+
+  onBeforeEnter(location) {
+    const targetEmail = location?.params?.email;
+    if (targetEmail) {
+      this.userDetail = userData.filter(
+        (user) => user.email === targetEmail
+      )[0];
+    }
+  }
+
+  onCancel() {
+    Router.go(AppRoutes.main.path);
   }
   render() {
     return html`<my-page-layout
@@ -62,7 +78,12 @@ export default class AddEmployee extends LitElement {
         ></my-select>
         <section class="actions">
           <my-button>Save</my-button>
-          <my-button variant="outlined" color="secondary">Cancel</my-button>
+          <my-button
+            variant="outlined"
+            color="secondary"
+            @click=${this.onCancel}
+            >Cancel</my-button
+          >
         </section>
       </section>
     </my-page-layout>`;

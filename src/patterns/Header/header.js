@@ -1,6 +1,12 @@
+import { Router } from '@vaadin/router';
 import { LitElement, html, css } from 'lit';
+import { AppRoutes } from '../../constants';
 
 export class Header extends LitElement {
+  toNavigate(path) {
+    Router.go(path);
+  }
+
   render() {
     return html`<header class="header">
       <my-nav>
@@ -10,6 +16,7 @@ export class Header extends LitElement {
             variant="text"
             color="primary"
             size="medium"
+            @click=${() => this.toNavigate(AppRoutes.employee.path)}
           >
             Employees
           </my-button>
@@ -19,6 +26,7 @@ export class Header extends LitElement {
             variant="text"
             color="primary"
             size="medium"
+            @click=${() => this.toNavigate(AppRoutes.addEmployee.path)}
           >
             Add new
           </my-button>

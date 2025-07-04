@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { userData, userColumns } from '../../data/index';
+import { Router } from '@vaadin/router';
 
 const pageSize = 10; // Number of users per page
 
@@ -53,8 +54,11 @@ export default class Employee extends LitElement {
   }
 
   onDeleteUser(user) {
-    console.log('Delete user:', user);
     this.deleteUser = user;
+  }
+
+  onEditUser(user) {
+    Router.go(`/edit-employee/${user.email}`);
   }
 
   render() {
@@ -139,7 +143,13 @@ export default class Employee extends LitElement {
               class="actions"
               style="display:flex; gap:1rem;margin-top:1rem"
             >
-              <my-button icon="edit" color="secondary"> Edit </my-button>
+              <my-button
+                icon="edit"
+                color="secondary"
+                @click=${() => this.onEditUser(user)}
+              >
+                Edit
+              </my-button>
               <my-button icon="trash" @click=${() => this.onDeleteUser(user)}>
                 Delete
               </my-button>
@@ -199,7 +209,12 @@ export default class Employee extends LitElement {
                   </my-table-cell>`
               )}
               <my-table-cell>
-                <my-icon-button icon="edit" variant="text" size="medium">
+                <my-icon-button
+                  icon="edit"
+                  variant="text"
+                  size="medium"
+                  @click=${() => this.onEditUser(user)}
+                >
                 </my-icon-button>
                 <my-icon-button
                   icon="trash"
