@@ -1,27 +1,35 @@
 import { createStore } from 'zustand/vanilla';
+import { persist } from 'zustand/middleware';
 import { employeeData } from '../data';
 
-export const employeeStore = createStore((set) => ({
-  employee: employeeData,
-  setEmployee: (employee) => set({ employee }),
-  addEmployee: (newEmployee) =>
-    set((state) => ({
-      employee: [newEmployee, ...state.employee],
-    })),
-  updateEmployee: (updatedEmployee) =>
-    set((state) => {
-      const updatedList = state.employee.map((user) =>
-        user.email === updatedEmployee.email ? updatedEmployee : user
-      );
-      return { employee: updatedList };
+export const employeeStore = createStore(
+  persist(
+    (set) => ({
+      employee: employeeData,
+      setEmployee: (employee) => set({ employee }),
+      addEmployee: (newEmployee) =>
+        set((state) => ({
+          employee: [newEmployee, ...state.employee],
+        })),
+      updateEmployee: (updatedEmployee) =>
+        set((state) => {
+          const updatedList = state.employee.map((user) =>
+            user.email === updatedEmployee.email ? updatedEmployee : user
+          );
+          return { employee: updatedList };
+        }),
+      removeEmployee: (email) =>
+        set((state) => {
+          return {
+            employee: state.employee.filter((user) => user.email !== email),
+          };
+        }),
     }),
-  removeEmployee: (email) =>
-    set((state) => {
-      return {
-        employee: state.employee.filter((user) => user.email !== email),
-      };
-    }),
-}));
+    {
+      name: 'employee-store',
+    }
+  )
+);
 
 export const useEmployeeStore = () => employeeStore.getState();
 

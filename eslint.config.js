@@ -17,6 +17,7 @@ export default [js.configs.recommended, {
       process: 'readonly',
       CustomEvent:'readonly',
       setTimeout: 'readonly',
+      localStorage: 'readonly',
     },
   },
   files: ['**/*.js'],
