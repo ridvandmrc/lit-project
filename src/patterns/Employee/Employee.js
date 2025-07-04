@@ -10,6 +10,7 @@ export default class Employee extends LitElement {
       total: { type: Number, state: true },
       data: { type: Array, state: true },
       view: { type: String, state: true }, // category | table
+      deleteUser: { type: Object, state: true },
     };
   }
 
@@ -51,6 +52,11 @@ export default class Employee extends LitElement {
     return this.data.every((user) => user.selected);
   }
 
+  onDeleteUser(user) {
+    console.log('Delete user:', user);
+    this.deleteUser = user;
+  }
+
   render() {
     return html`
       <my-page-layout pageTitle="Employee List">
@@ -82,6 +88,13 @@ export default class Employee extends LitElement {
             current="${this.current || 1}"
           ></my-pagination>
         </section>
+        <my-confirmation
+          .open=${!!this.deleteUser?.firstName}
+          @cancel=${() => this.onDeleteUser(null)}
+          message="Selected Employee record of ${this.deleteUser
+            ?.firstName} will be deleted"
+        >
+        </my-confirmation>
       </my-page-layout>
     `;
   }
@@ -127,7 +140,9 @@ export default class Employee extends LitElement {
               style="display:flex; gap:1rem;margin-top:1rem"
             >
               <my-button icon="edit" color="secondary"> Edit </my-button>
-              <my-button icon="trash"> Delete </my-button>
+              <my-button icon="trash" @click=${() => this.onDeleteUser(user)}>
+                Delete
+              </my-button>
             </section>
           </my-card>`
       )}
@@ -186,7 +201,12 @@ export default class Employee extends LitElement {
               <my-table-cell>
                 <my-icon-button icon="edit" variant="text" size="medium">
                 </my-icon-button>
-                <my-icon-button icon="trash" variant="text" size="medium">
+                <my-icon-button
+                  icon="trash"
+                  variant="text"
+                  size="medium"
+                  @click=${() => this.onDeleteUser(user)}
+                >
                 </my-icon-button>
               </my-table-cell>
             </my-table-row>`

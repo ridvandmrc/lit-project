@@ -14,3 +14,5 @@ export * from './Checkbox/checkbox.js';
 export * from './Input/input.js';
 export * from './Select/select.js';
 export * from './DatePicker/datePicker.js';
+export * from './Backdrop/backdrop.js';
+export * from './Confirmation/confirmation.js';
