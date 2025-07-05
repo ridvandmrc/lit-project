@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 font-icons
+coverage
 
 # Editor directories and files
 .vscode/*

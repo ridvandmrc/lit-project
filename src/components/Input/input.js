@@ -5,7 +5,7 @@ class MyInput extends LitElement {
     return {
       label: { type: String },
       type: { type: String, reflect: true }, // text | password | email | number
-      value: { type: String },
+      value: { type: String,reflect: true },
       placeholder: { type: String },
       readonly: { type: Boolean, reflect: true },
     };

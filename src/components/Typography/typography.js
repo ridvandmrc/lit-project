@@ -10,13 +10,6 @@ const elements = {
   caption: html`<span><slot></slot></span>`,
 };
 
-/**
- * @desc An example element.
- *
- * @slot - This element has a slot
- * @csspart Typography - The button
- */
-
 export class Typography extends LitElement {
   static get properties() {
     return {

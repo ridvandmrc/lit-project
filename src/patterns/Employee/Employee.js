@@ -58,7 +58,6 @@ export default class Employee extends LitElement {
   }
 
   updateRowSelection(row, { checked }) {
-    console.log();
     row.selected = checked;
     this.requestUpdate();
   }
