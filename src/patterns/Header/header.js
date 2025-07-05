@@ -91,6 +91,15 @@ export class Header extends LitElement {
         height: 1.4rem;
         cursor: pointer;
       }
+
+      @media (max-width: 850px) {
+        .nav-content {
+          justify-content: unset;
+        }
+        .flag {
+          margin-left: auto;
+        }
+      }
     `;
   }
 }

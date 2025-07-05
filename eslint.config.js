@@ -25,6 +25,7 @@ export default [
         expect: 'readonly',
         Event: 'readonly',
         beforeEach: 'readonly',
+        ResizeObserver:'readonly',
       },
     },
     ignores: ['coverage/**'],

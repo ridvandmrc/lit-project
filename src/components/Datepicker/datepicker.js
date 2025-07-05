@@ -77,6 +77,7 @@ class MyDatepicker extends LitElement {
         font-size: var(--font-size-lg);
         color: var(--text-color);
         outline: none;
+        box-sizing: border-box;
       }
       .input-wrapper {
         position: relative;
@@ -84,7 +85,7 @@ class MyDatepicker extends LitElement {
       my-icon {
         background-color: white;
         position: absolute;
-        right: -12px;
+        right: 10px;
         top: 8px;
         pointer-events: none;
         color: var(--icon-color);

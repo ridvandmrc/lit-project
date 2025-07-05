@@ -21,6 +21,7 @@ export default class Employee extends LitElement {
       data: { type: Array, state: true },
       view: { type: String, state: true }, // category | table
       deleteUser: { type: Object, state: true },
+      categorySize: { type: Boolean, state: true },
     };
   }
 
@@ -33,10 +34,21 @@ export default class Employee extends LitElement {
     this.employeeSub = employeeStore.subscribe(() => {
       this.updatePage(this.current); // Reset to first page on data change
     });
+
+    this.observer = new ResizeObserver((e) => {
+      const currentWidth = e[0].contentBoxSize[0].inlineSize;
+      if (currentWidth < 1100) {
+        this.categorySize = true;
+      } else {
+        this.categorySize = false;
+      }
+    });
+    this.observer.observe(document.body);
   }
 
   disconnectedCallback() {
     this.employeeSub();
+    this.observer.unobserve(document.body);
   }
 
   updatePage(target) {
@@ -89,27 +101,32 @@ export default class Employee extends LitElement {
   render() {
     return html`
       <my-page-layout pageTitle=${t('employee.title')}>
-        <section slot="head-actions">
-          <my-button
-            class="${this.view === 'table' ? 'selected' : 'not-selected'}"
-            variant="text"
-            color="primary"
-            size="large"
-            icon="hamburger"
-            @click="${() => this.updateView('table')}"
-          >
-          </my-button>
-          <my-button
-            class="${this.view === 'category' ? 'selected' : 'not-selected'}"
-            variant="text"
-            color="primary"
-            size="large"
-            icon="grid"
-            @click="${() => this.updateView('category')}"
-          ></my-button>
-        </section>
-
-        ${this.view === 'table' ? this.tableView() : this.categoryView()}
+        ${!this.categorySize
+          ? html`<section slot="head-actions">
+              <my-button
+                class="${this.view === 'table' ? 'selected' : 'not-selected'}"
+                variant="text"
+                color="primary"
+                size="large"
+                icon="hamburger"
+                @click="${() => this.updateView('table')}"
+              >
+              </my-button>
+              <my-button
+                class="${this.view === 'category'
+                  ? 'selected'
+                  : 'not-selected'}"
+                variant="text"
+                color="primary"
+                size="large"
+                icon="grid"
+                @click="${() => this.updateView('category')}"
+              ></my-button>
+            </section>`
+          : ''}
+        ${this.view === 'category' || this.categorySize
+          ? this.categoryView()
+          : this.tableView()}
         <section class="pagination">
           <my-pagination
             @pageChange="${(e) => this.updatePage(e.detail.current)}"
@@ -158,6 +175,32 @@ export default class Employee extends LitElement {
         cursor: pointer;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
+        box-sizing: border-box;
+      }
+
+      @media (max-width: 850px) {
+        .category-view {
+          grid-template-columns: 1fr;
+        }
+
+        .category-card {
+          width: 100%;
+        }
+      }
+
+      .ellipsis-line {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+
+      @media (max-width: 1200px) {
+        .table {
+          width: 100%;
+          overflow-x: auto;
+          display: block;
+        }
       }
     `;
   }
@@ -190,11 +233,20 @@ export default class Employee extends LitElement {
               <my-button
                 icon="edit"
                 color="secondary"
-                @click=${() => this.onEditUser(user)}
+                @click=${(e) => {
+                  e.stopPropagation();
+                  this.onEditUser(user);
+                }}
               >
                 ${t('common.edit')}
               </my-button>
-              <my-button icon="trash" @click=${() => this.onDeleteUser(user)}>
+              <my-button
+                icon="trash"
+                @click=${(e) => {
+                  e.stopPropagation();
+                  this.onDeleteUser(user);
+                }}
+              >
                 ${t('common.delete')}
               </my-button>
             </section>
@@ -204,7 +256,7 @@ export default class Employee extends LitElement {
   }
 
   tableView() {
-    return html`<my-table>
+    return html`<my-table class="table">
       <my-table-group>
         <my-table-row>
           <my-table-cell>
@@ -216,7 +268,11 @@ export default class Employee extends LitElement {
           ${userColumns.map(
             (userKey) =>
               html`<my-table-cell>
-                <my-typography type="subtitle" color="primary">
+                <my-typography
+                  type="subtitle"
+                  color="primary"
+                  class="ellipsis-line"
+                >
                   ${t(`employee.${userKey}`)}
                 </my-typography>
               </my-table-cell>`
@@ -247,12 +303,13 @@ export default class Employee extends LitElement {
                         ? 'subtitle'
                         : 'paragraph'}
                       color="text"
+                      class="ellipsis-line"
                     >
                       ${user[userKey]}
                     </my-typography>
                   </my-table-cell>`
               )}
-              <my-table-cell>
+              <my-table-cell style="white-space: nowrap">
                 <my-icon-button
                   icon="edit"
                   variant="text"

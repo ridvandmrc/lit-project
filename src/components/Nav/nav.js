@@ -4,7 +4,7 @@ export class Nav extends LitElement {
   render() {
     return html`<nav>
       <img src="/ing.webp" alt="Ing Logo" />
-      <my-typography type="p" color="text">ING</my-typography>
+      <my-typography brand type="paragraph" color="text">ING</my-typography>
       <slot> </slot>
     </nav>`;
   }
@@ -29,6 +29,16 @@ export class Nav extends LitElement {
       my-typography {
         margin-right: var(--spacing-md);
         font-weight: 550;
+      }
+
+      @media (max-width: 850px) {
+        img{
+          display: none;
+        }
+
+        [brand] {
+          display: none;
+        }
       }
     `;
   }

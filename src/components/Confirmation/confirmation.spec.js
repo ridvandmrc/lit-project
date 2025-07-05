@@ -29,7 +29,6 @@ describe('my-card', () => {
 
     const [proceedBtn, cancelBtn] = el.shadowRoot.querySelectorAll('my-button');
 
-    console.log(proceedBtn, cancelBtn);
     proceedBtn.click();
     cancelBtn.click();
     expect(spyCancel).toHaveBeenCalled();

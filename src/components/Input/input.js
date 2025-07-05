@@ -67,6 +67,7 @@ class MyInput extends LitElement {
         font-size: var(--font-size-lg);
         color: var(--text-color);
         outline: none;
+        box-sizing: border-box;
       }
 
       input:read-only {

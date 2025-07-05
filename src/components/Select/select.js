@@ -77,6 +77,7 @@ class MySelect extends LitElement {
         color: var(--text-color);
         outline: none;
         appearance: none;
+        box-sizing: border-box;
       }
       .input-wrapper {
         position: relative;

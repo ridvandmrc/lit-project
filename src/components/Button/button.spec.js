@@ -7,7 +7,6 @@ describe('my-button', () => {
     const el = await fixture(html`<my-button>My button</my-button>`);
 
     const button = el.shadowRoot.querySelector('button');
-    console.log(el.innerHTML);
 
     expect(button).to.exist;
     expect(button.classList.contains('contained')).to.be.true;

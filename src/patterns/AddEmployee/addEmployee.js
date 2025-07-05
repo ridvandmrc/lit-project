@@ -163,6 +163,34 @@ export default class AddEmployee extends LitElement {
       my-typography {
         grid-column: 1 / -1;
       }
+
+      @media (max-width: 850px) {
+        .content {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .content {
+          grid-template-columns: 1fr;
+          padding: var(--spacing-md);
+          gap: var(--spacing-md);
+        }
+        my-input,
+        my-datepicker,
+        my-select {
+          max-width: 100%;
+        }
+
+        .actions {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .actions my-button {
+          width: 100%;
+        }
+      }
     `;
   }
 }

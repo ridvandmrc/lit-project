@@ -7,7 +7,6 @@ export const themeStore = createStore(
       theme: 'light', // light | dark
       toggleTheme: () =>
         set((state) => {
-          console.log('Toggling theme from', state.theme);
           document.body.classList.remove(`body-${state.theme}`);
           document.body.classList.add(
             `body-${state.theme === 'light' ? 'dark' : 'light'}`
