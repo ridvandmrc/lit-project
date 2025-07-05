@@ -1,6 +1,12 @@
 import { LitElement, html, css } from 'lit';
 
 export default class Card extends LitElement {
+  static get properties() {
+    return {
+      selected: { type: Boolean, reflect: true },
+    };
+  }
+
   render() {
     return html`<slot></slot>`;
   }
@@ -14,6 +20,9 @@ export default class Card extends LitElement {
         padding: var(--spacing-md);
         background-color: var(--bg-white);
         box-shadow: var(--shadow-md);
+      }
+      :host([selected]) {
+        background-color: var(--selected-bg);
       }
     `;
   }

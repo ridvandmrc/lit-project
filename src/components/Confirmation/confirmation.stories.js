@@ -15,12 +15,18 @@ export default {
     }
     el.open = args.open;
     el.message = args.message;
+    el.title = args.title;
+    el.proceedText = args.proceedText;
+    el.cancelText = args.cancelText;
 
     return el;
   },
   argTypes: {
     open: 'boolean',
     message: 'string',
+    title: 'text',
+    proceedText: 'text',
+    cancelText: 'text',
   },
   parameters: {
     docs: {
@@ -35,5 +41,8 @@ export const Confirmation = {
   args: {
     open: false,
     message: 'Are you sure you want to proceed?',
+    title: 'Are you sure?',
+    proceedText: 'Proceed',
+    cancelText: 'Cancel',
   },
 };

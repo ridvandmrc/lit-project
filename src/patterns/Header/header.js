@@ -1,10 +1,47 @@
 import { Router } from '@vaadin/router';
 import { LitElement, html, css } from 'lit';
 import { AppRoutes } from '../../constants';
+import {
+  useLanguageStore,
+  updateLanguage,
+  useThemeStore,
+  toggleTheme,
+  initiateTheme,
+} from '../../store';
+import { t } from '../../i18n';
+
+const flags = {
+  tr: html`<img src="/flags/en.svg" alt="English" />`,
+  en: html`<img src="/flags/tr.svg" alt="Turkish" />`,
+};
 
 export class Header extends LitElement {
+  static get properties() {
+    return {
+      theme: { type: String, state: true },
+    };
+  }
   toNavigate(path) {
     Router.go(path);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.lang = useLanguageStore().lang;
+    document.documentElement.lang = this.lang;
+
+    initiateTheme();
+    this.theme = useThemeStore().theme;
+  }
+
+  updateLang() {
+    updateLanguage(this.lang === 'en' ? 'tr' : 'en');
+    window.location.reload(); // Reload to apply language change
+  }
+
+  updateTheme() {
+    toggleTheme();
+    this.theme = useThemeStore().theme;
   }
 
   render() {
@@ -18,7 +55,7 @@ export class Header extends LitElement {
             size="medium"
             @click=${() => this.toNavigate(AppRoutes.employee.path)}
           >
-            Employees
+            ${t('header.employees')}
           </my-button>
 
           <my-button
@@ -28,8 +65,11 @@ export class Header extends LitElement {
             size="medium"
             @click=${() => this.toNavigate(AppRoutes.addEmployee.path)}
           >
-            Add new
+            ${t('header.add-new')}
           </my-button>
+          <div class="flag" @click=${this.updateLang}>${flags[this.lang]}</div>
+          <my-icon-button @click=${this.updateTheme} .icon=${this.theme}>
+          </my-icon-button>
         </div>
       </my-nav>
     </header>`;
@@ -40,8 +80,16 @@ export class Header extends LitElement {
         display: flex;
         flex: 1;
         justify-content: flex-end;
+        align-items: center;
         margin-right: var(--spacing-md);
-        gap: var(--spacing-sm);
+        gap: var(--spacing-xsm);
+      }
+      .flag {
+        display: flex;
+        align-items: center;
+        width: 1.4rem;
+        height: 1.4rem;
+        cursor: pointer;
       }
     `;
   }

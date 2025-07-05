@@ -1,0 +1,30 @@
+{
+  "common": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "proceed": "Proceed",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "header": {
+    "employees": "Employees",
+    "add-new": "Add New"
+  },
+  "employee": {
+    "title": "Employee List",
+    "remove-title": "Are you sure?",
+    "remove-message": "Selected Employee record of ${name} will be removed. ",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "employmentDate": "Employment Date",
+    "birthDate": "Birth Date",
+    "phone": "Phone",
+    "email": "Email",
+    "department": "Department",
+    "position": "Position",
+    "actions": "Actions",
+    "add-employee": "Add Employee",
+    "edit-employee": "Edit Employee",
+    "edit-message": "You are editing ${name}."
+  }
+}

@@ -31,7 +31,7 @@ export default class TableRow extends LitElement {
       }
 
       :host(.selected) {
-        background-color: var(--table-selected-bg);
+        background-color: var(--selected-bg);
       }
     `;
   }

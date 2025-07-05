@@ -5,6 +5,9 @@ class Confirmation extends LitElement {
     return {
       open: { type: Boolean, reflect: true },
       message: { type: String, reflect: true },
+      title: { type: String, reflect: true },
+      proceedText: { type: String, reflect: true },
+      cancelText: { type: String, reflect: true },
     };
   }
 
@@ -27,7 +30,7 @@ class Confirmation extends LitElement {
       <my-card>
         <section class="header">
           <my-typography type="title" color="primary">
-            Are you Sure?
+            ${this.title}
           </my-typography>
           <my-icon-button
             @click=${this.cancelCard}
@@ -40,14 +43,14 @@ class Confirmation extends LitElement {
         </my-typography>
         <section class="actions">
           <my-button variant="contained" @click=${this.onProceed}>
-            Proceed
+            ${this.proceedText}
           </my-button>
           <my-button
             variant="outlined"
             color="secondary"
             @click=${this.cancelCard}
           >
-            Cancel
+            ${this.cancelText}
           </my-button>
         </section>
       </my-card>

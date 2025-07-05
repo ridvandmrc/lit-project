@@ -9,6 +9,7 @@ import {
   useTableStore,
   updateView,
 } from '../../store';
+import { t } from '../../i18n';
 
 const pageSize = 10; // Number of users per page
 
@@ -57,6 +58,7 @@ export default class Employee extends LitElement {
   }
 
   updateRowSelection(row, { checked }) {
+    console.log();
     row.selected = checked;
     this.requestUpdate();
   }
@@ -87,7 +89,7 @@ export default class Employee extends LitElement {
 
   render() {
     return html`
-      <my-page-layout pageTitle="Employee List">
+      <my-page-layout pageTitle=${t('employee.title')}>
         <section slot="head-actions">
           <my-button
             class="${this.view === 'table' ? 'selected' : 'not-selected'}"
@@ -118,10 +120,14 @@ export default class Employee extends LitElement {
         </section>
         <my-confirmation
           .open=${!!this.deleteUser?.firstName}
+          .title=${t('employee.remove-title')}
+          .proceedText=${t('common.proceed')}
+          .cancelText=${t('common.cancel')}
           @proceed=${this.proceedDeleteUser}
           @cancel=${() => this.onDeleteUser(null)}
-          message="Selected Employee record of ${this.deleteUser
-            ?.firstName} will be deleted"
+          message=${t('employee.remove-message', {
+            name: this.deleteUser?.firstName,
+          })}
         >
         </my-confirmation>
       </my-page-layout>
@@ -141,23 +147,37 @@ export default class Employee extends LitElement {
       .not-selected {
         opacity: 0.5;
       }
+      .category-view {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        justify-items: center;
+      }
+
+      .category-card {
+        display: grid;
+        cursor: pointer;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
     `;
   }
 
   categoryView() {
-    return html`<section
-      style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; justify-items: center"
-    >
+    return html`<section class="category-view">
       ${this.data.map(
         (user) =>
           html` <my-card
-            style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem"
+            @click=${() =>
+              this.updateRowSelection(user, { checked: !user.selected })}
+            class="category-card"
+            .selected=${user.selected}
           >
             ${userColumns.map(
               (key) =>
                 html`<section>
                   <my-typography type="paragraph" color="disabled">
-                    ${key}
+                    ${t(`employee.${key}`)}
                   </my-typography>
                   <my-typography type="subtitle" color="text">
                     ${user[key]}
@@ -173,10 +193,10 @@ export default class Employee extends LitElement {
                 color="secondary"
                 @click=${() => this.onEditUser(user)}
               >
-                Edit
+                ${t('common.edit')}
               </my-button>
               <my-button icon="trash" @click=${() => this.onDeleteUser(user)}>
-                Delete
+                ${t('common.delete')}
               </my-button>
             </section>
           </my-card>`
@@ -198,13 +218,13 @@ export default class Employee extends LitElement {
             (userKey) =>
               html`<my-table-cell>
                 <my-typography type="subtitle" color="primary">
-                  ${userKey}
+                  ${t(`employee.${userKey}`)}
                 </my-typography>
               </my-table-cell>`
           )}
           <my-table-cell>
             <my-typography type="subtitle" color="primary">
-              Actions
+              ${t('employee.actions')}
             </my-typography>
           </my-table-cell>
         </my-table-row>

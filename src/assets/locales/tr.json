@@ -1,0 +1,30 @@
+{
+  "common": {
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "proceed": "Devam Et",
+    "cancel": "İptal",
+    "save": "Kaydet"
+  },
+  "header": {
+    "employees": "Çalışanlar",
+    "add-new": "Yeni Ekle"
+  },
+  "employee": {
+    "title": "Çalışan Listesi",
+    "remove-title": "Emin misiniz?",
+    "remove-message": "Seçilen ${name} adlı çalışanın kaydı silinecek.",
+    "firstName": "Ad",
+    "lastName": "Soyad",
+    "employmentDate": "İşe Başlama Tarihi",
+    "birthDate": "Doğum Tarihi",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "department": "Departman",
+    "position": "Pozisyon",
+    "actions": "İşlemler",
+    "add-employee": "Çalışan Ekle",
+    "edit-employee": "Çalışanı Düzenle",
+    "edit-message": "${name} adlı çalışanı düzenliyorsunuz."
+  }
+}

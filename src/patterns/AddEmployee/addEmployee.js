@@ -6,6 +6,7 @@ import {
   addEmployee,
   updateEmployee,
 } from '../../store/index';
+import { t } from '../../i18n';
 
 export default class AddEmployee extends LitElement {
   static get properties() {
@@ -45,52 +46,56 @@ export default class AddEmployee extends LitElement {
   }
   render() {
     return html`<my-page-layout
-      pageTitle=${this.userDetail ? 'Edit Employee' : 'Employee List'}
+      pageTitle=${this.userDetail
+        ? t('employee.edit-employee')
+        : t('employee.add-employee')}
     >
       <section class="content">
         ${this.isUpdate
           ? html`<my-typography type="subtitle" color="text">
-              You are editing ${this.userDetail?.firstName || ''}
-              ${this.userDetail?.lastName || ''}
+              ${t('employee.edit-message', {
+                name: `${this.userDetail?.firstName || ''}
+               ${this.userDetail?.lastName || ''}`,
+              })}
             </my-typography>`
           : ''}
 
         <my-input
-          label="First Name"
+          label=${t('employee.firstName')}
           .value=${this.userDetail?.firstName || ''}
           @inputChange=${(e) => this.updateEntry('firstName', e.detail)}
         ></my-input>
         <my-input
-          label="Last Name"
+          label=${t('employee.lastName')}
           .value=${this.userDetail?.lastName || ''}
           @inputChange=${(e) => this.updateEntry('lastName', e.detail)}
         ></my-input>
         <my-datepicker
-          label="Date of Employment"
+          label=${t('employee.employmentDate')}
           format="DD/MM/YYYY"
           .value=${this.userDetail?.employmentDate || ''}
           @dateChange=${(e) => this.updateEntry('employmentDate', e.detail)}
         ></my-datepicker>
         <my-datepicker
-          label="Date of Birth"
+          label=${t('employee.birthDate')}
           format="DD/MM/YYYY"
           .value=${this.userDetail?.birthDate || ''}
           @dateChange=${(e) => this.updateEntry('birthDate', e.detail)}
         ></my-datepicker>
         <my-input
-          label="Phone"
+          label=${t('employee.phone')}
           .value=${this.userDetail?.phone || ''}
           @inputChange=${(e) => this.updateEntry('phone', e.detail)}
         ></my-input>
         <my-input
-          label="Email"
+          label=${t('employee.email')}
           .value=${this.userDetail?.email || ''}
           ?readonly=${this.isUpdate}
           @inputChange=${(e) => this.updateEntry('email', e.detail)}
         ></my-input>
 
         <my-select
-          label="Department"
+          label=${t('employee.department')}
           .value=${{
             value: this.userDetail?.department?.toLowerCase() || '',
             label: this.userDetail?.department || '',
@@ -103,7 +108,7 @@ export default class AddEmployee extends LitElement {
             this.updateEntry('department', e.detail.label)}
         ></my-select>
         <my-select
-          label="Position"
+          label=${t('employee.position')}
           .value=${{
             value: this.userDetail?.position?.toLowerCase() || '',
             label: this.userDetail?.position || '',
@@ -117,13 +122,13 @@ export default class AddEmployee extends LitElement {
             this.updateEntry('position', e.detail.label)}
         ></my-select>
         <section class="actions">
-          <my-button @click=${this.onSave}>Save</my-button>
+          <my-button @click=${this.onSave}> ${t('common.save')}</my-button>
           <my-button
             variant="outlined"
             color="secondary"
             @click=${this.onCancel}
           >
-            Cancel
+            ${t('common.cancel')}
           </my-button>
         </section>
       </section>

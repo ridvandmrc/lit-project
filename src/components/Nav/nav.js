@@ -6,8 +6,6 @@ export class Nav extends LitElement {
       <img src="/ing.webp" alt="Ing Logo" />
       <my-typography type="p" color="text">ING</my-typography>
       <slot> </slot>
-      <div class="flag">flag</div>
-      <div class="color-mode">mode</div>
     </nav>`;
   }
 
@@ -31,11 +29,6 @@ export class Nav extends LitElement {
       my-typography {
         margin-right: var(--spacing-md);
         font-weight: 550;
-      }
-
-      .flag {
-        margin-left: auto;
-        width:fit-content;
       }
     `;
   }

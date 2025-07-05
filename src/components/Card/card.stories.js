@@ -9,11 +9,13 @@ export default {
       el = document.createElement('my-card');
     }
     el.innerHTML = args.slot;
+    el.selected = args.selected;
 
     return el;
   },
   argTypes: {
     slot: 'text',
+    selected: 'boolean',
   },
   parameters: {
     docs: {
@@ -27,5 +29,6 @@ export default {
 export const Card = {
   args: {
     slot: 'Card Component',
+    selected: true,
   },
 };

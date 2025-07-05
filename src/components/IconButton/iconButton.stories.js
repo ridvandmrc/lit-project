@@ -18,6 +18,8 @@ export default {
     icon: {
       type: 'select',
       options: [
+        'light',
+        'dark',
         'calendar',
         'cancel',
         'edit',

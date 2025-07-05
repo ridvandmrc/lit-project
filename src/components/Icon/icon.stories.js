@@ -19,6 +19,8 @@ export default {
     name: {
       type: 'select',
       options: [
+        'light',
+        'dark',
         'calendar',
         'cancel',
         'edit',
