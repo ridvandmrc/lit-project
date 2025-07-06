@@ -1,7 +1,7 @@
 import { LitElement, css, html } from 'lit';
 
-const type = Object.freeze(['title', 'subtitle', 'paragraph', 'caption', '']);
-const color = Object.freeze(['primary', 'text', 'disabled']);
+const type = Object.freeze(['title', 'subtitle', 'paragraph', 'caption']);
+const color = Object.freeze(['primary', 'text', 'disabled', 'error']);
 
 const elements = {
   title: html`<h1><slot></slot></h1>`,
@@ -50,32 +50,36 @@ export class Typography extends LitElement {
         font-family: var(--font-family);
       }
 
-      :host(.title) {
+      :host([type='title']) {
         font-size: var(--font-size-xl);
         font-weight: 550;
       }
-      :host(.subtitle) {
+      :host([type='subtitle']) {
         font-size: var(--font-size-lg);
         font-weight: 550;
       }
-      :host(.paragraph) {
+      :host([type='paragraph']) {
         font-weight: 500;
         font-size: var(--font-size-md);
         line-height: 1.5;
         letter-spacing: 1px;
       }
-      :host(.caption) {
+      :host([type='caption']) {
         font-size: var(--font-size-sm);
       }
 
-      :host(.primary) {
+      :host([color='primary']) {
         color: var(--primary-color);
       }
-      :host(.text) {
+      :host([color='text']) {
         color: var(--text-color);
       }
-      :host(.disabled) {
+      :host([color='disabled']) {
         color: var(--disabled-color);
+      }
+
+      :host([color='error']) {
+        color: var(--error-color);
       }
 
       h1,

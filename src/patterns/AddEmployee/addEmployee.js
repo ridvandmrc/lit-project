@@ -7,12 +7,25 @@ import {
   updateEmployee,
 } from '../../store/index';
 import { t } from '../../i18n';
+import { userColumns } from '../../data';
+
+const phoneRegex =
+  /^(?:\+90|0)?[\s.-]?(5\d{2})[\s.-]?(\d{3})[\s.-]?(\d{2})[\s.-]?(\d{2})$/;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+const ErrorMessage = {
+  required: t('employee.required'),
+  phoneFormat: t('employee.phoneFormat'),
+  emailFormat: t('employee.emailFormat'),
+  uniqueEmail: t('employee.uniqueEmail'),
+};
 
 export default class AddEmployee extends LitElement {
   static get properties() {
     return {
       userDetail: { type: Object, state: true }, // user detail
       isUpdate: { type: Boolean, state: true }, // is update mode
+      inputError: { type: Object, state: true }, // input error
     };
   }
 
@@ -34,7 +47,44 @@ export default class AddEmployee extends LitElement {
     this.userDetail = { ...this.userDetail, [target]: value };
   }
 
+  checkInputCases() {
+    return {
+      phone: () => {
+        if (!phoneRegex.test(this.userDetail.phone)) {
+          this.inputError.phone = ErrorMessage.phoneFormat;
+        }
+      },
+      email: () => {
+        if (!emailRegex.test(this.userDetail.email)) {
+          this.inputError.email = ErrorMessage.emailFormat;
+        }
+      },
+      uniqueEmail: () => {
+        if (this.isUpdate) return;
+        const { employee } = useEmployeeStore();
+        if (employee.some((user) => user.email === this.userDetail.email)) {
+          this.inputError.email = ErrorMessage.uniqueEmail;
+        }
+      },
+    };
+  }
+
+  checkInputFields() {
+    this.inputError = {};
+    userColumns.forEach((column) => {
+      if (!this.userDetail?.[column]) {
+        this.inputError[column] = ErrorMessage.required;
+      }
+    });
+    if (Object.keys(this.inputError).length > 0) return;
+    Object.values(this.checkInputCases()).forEach((check) => check());
+  }
+
   onSave() {
+    this.checkInputFields();
+    if (Object.keys(this.inputError).length > 0) {
+      return;
+    }
     this.isUpdate
       ? updateEmployee(this.userDetail)
       : addEmployee(this.userDetail);
@@ -54,19 +104,23 @@ export default class AddEmployee extends LitElement {
         ${this.isUpdate
           ? html`<my-typography type="subtitle" color="text">
               ${t('employee.edit-message', {
-                name: `${this.userDetail?.firstName || ''}
-               ${this.userDetail?.lastName || ''}`,
+                name: `${this.userDetail?.email || ''}
+            `,
               })}
             </my-typography>`
           : ''}
 
         <my-input
           label=${t('employee.firstName')}
+          .error=${!!this.inputError?.firstName}
+          errorMessage=${this.inputError?.firstName}
           .value=${this.userDetail?.firstName || ''}
           @inputChange=${(e) => this.updateEntry('firstName', e.detail)}
         ></my-input>
         <my-input
           label=${t('employee.lastName')}
+          .error=${!!this.inputError?.lastName}
+          errorMessage=${this.inputError?.lastName}
           .value=${this.userDetail?.lastName || ''}
           @inputChange=${(e) => this.updateEntry('lastName', e.detail)}
         ></my-input>
@@ -74,22 +128,30 @@ export default class AddEmployee extends LitElement {
           label=${t('employee.employmentDate')}
           format="DD/MM/YYYY"
           .value=${this.userDetail?.employmentDate || ''}
+          .error=${!!this.inputError?.employmentDate}
+          errorMessage=${this.inputError?.employmentDate}
           @dateChange=${(e) => this.updateEntry('employmentDate', e.detail)}
         ></my-datepicker>
         <my-datepicker
           label=${t('employee.birthDate')}
           format="DD/MM/YYYY"
           .value=${this.userDetail?.birthDate || ''}
+          .error=${!!this.inputError?.birthDate}
+          errorMessage=${this.inputError?.birthDate}
           @dateChange=${(e) => this.updateEntry('birthDate', e.detail)}
         ></my-datepicker>
         <my-input
           label=${t('employee.phone')}
           .value=${this.userDetail?.phone || ''}
+          .error=${!!this.inputError?.phone}
+          errorMessage=${this.inputError?.phone}
           @inputChange=${(e) => this.updateEntry('phone', e.detail)}
         ></my-input>
         <my-input
           label=${t('employee.email')}
           .value=${this.userDetail?.email || ''}
+          .error=${!!this.inputError?.email}
+          errorMessage=${this.inputError?.email}
           ?readonly=${this.isUpdate}
           @inputChange=${(e) => this.updateEntry('email', e.detail)}
         ></my-input>
@@ -104,11 +166,15 @@ export default class AddEmployee extends LitElement {
             { value: 'analytics', label: 'Analytics' },
             { value: 'tech', label: 'Tech' },
           ]}
+          .error=${!!this.inputError?.department}
+          errorMessage=${this.inputError?.department}
           @selectionChange=${(e) =>
             this.updateEntry('department', e.detail.label)}
+          placeholder=${t('employee.select-department')}
         ></my-select>
         <my-select
           label=${t('employee.position')}
+          placeholder=${t('employee.select-position')}
           .value=${{
             value: this.userDetail?.position?.toLowerCase() || '',
             label: this.userDetail?.position || '',
@@ -118,6 +184,8 @@ export default class AddEmployee extends LitElement {
             { value: 'senior', label: 'Senior' },
             { value: 'expert', label: 'Expert' },
           ]}
+          .error=${!!this.inputError?.position}
+          errorMessage=${this.inputError?.position}
           @selectionChange=${(e) =>
             this.updateEntry('position', e.detail.label)}
         ></my-select>

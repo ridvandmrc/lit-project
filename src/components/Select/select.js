@@ -7,6 +7,8 @@ class MySelect extends LitElement {
       value: { type: Object },
       valueList: { type: Array },
       placeholder: { type: String },
+      error: { type: Boolean, reflect: true },
+      errorMessage: { type: String },
     };
   }
 
@@ -15,7 +17,7 @@ class MySelect extends LitElement {
     this.label = '';
     this.value = {};
     this.valueList = [];
-    this.placeholder = 'Please enter Value';
+    this.placeholder = '';
   }
 
   onSelectionChange(e) {
@@ -38,6 +40,8 @@ class MySelect extends LitElement {
           placeholder=${this.placeholder}
           @input=${this.onSelectionChange}
         >
+          <option value="">${this.placeholder}</option>
+
           ${this.valueList.map(
             ({ label, value }) =>
               html`<option
@@ -50,6 +54,13 @@ class MySelect extends LitElement {
         </select>
         <my-icon name="chevron-right" color="text" size="small"></my-icon>
       </div>
+      <my-typography
+        class=${`error-message  ${this.error && this.errorMessage ? 'visible' : ''} `}
+        type="caption"
+        color="error"
+      >
+        ${this.errorMessage}
+      </my-typography>
     `;
   }
 
@@ -90,6 +101,18 @@ class MySelect extends LitElement {
         pointer-events: none;
         color: var(--icon-color);
         transform: rotate(90deg);
+      }
+      :host([error]) select {
+        border-color: var(--error-color, red);
+      }
+
+      .error-message {
+        opacity: 0;
+        margin: var(--spacing-2xsm) 0 0 var(--spacing-2xsm);
+        transition: opacity 0.3s;
+      }
+      .error-message.visible {
+        opacity: 1;
       }
     `;
   }

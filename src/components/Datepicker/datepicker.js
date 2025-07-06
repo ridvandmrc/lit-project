@@ -7,6 +7,8 @@ class MyDatepicker extends LitElement {
       value: { type: String },
       placeholder: { type: String },
       format: { type: String, reflect: true }, // e.g., 'DD/MM/YYYY' | 'YYYY-MM-DD'
+      error: { type: Boolean, reflect: true },
+      errorMessage: { type: String },
     };
   }
 
@@ -51,6 +53,13 @@ class MyDatepicker extends LitElement {
         />
         <my-icon name="calendar"></my-icon>
       </div>
+      <my-typography
+        class=${`error-message  ${this.error && this.errorMessage ? 'visible' : ''} `}
+        type="caption"
+        color="error"
+      >
+        ${this.errorMessage}
+      </my-typography>
     `;
   }
 
@@ -89,6 +98,19 @@ class MyDatepicker extends LitElement {
         top: 8px;
         pointer-events: none;
         color: var(--icon-color);
+      }
+
+      :host([error]) input {
+        border-color: var(--error-color, red);
+      }
+
+      .error-message {
+        opacity: 0;
+        margin: var(--spacing-2xsm) 0 0 var(--spacing-2xsm);
+        transition: opacity 0.3s;
+      }
+      .error-message.visible {
+        opacity: 1;
       }
     `;
   }

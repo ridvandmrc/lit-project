@@ -12,6 +12,8 @@ export default {
     el.type = args.type;
     el.value = args.value;
     el.placeholder = args.placeholder;
+    el.error = args.error;
+    el.errorMessage = args.errorMessage;
 
     return el;
   },
@@ -20,6 +22,8 @@ export default {
     value: 'text',
     placeholder: 'text',
     type: { type: 'select', options: ['text', 'password', 'email', 'number'] },
+    error: 'boolean',
+    errorMessage: 'text',
   },
   parameters: {
     docs: {
@@ -38,5 +42,7 @@ export const Input = {
     type: 'text',
     value: 'Jhon',
     placeholder: 'Please enter Value',
+    error: false,
+    errorMessage: '',
   },
 };

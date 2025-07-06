@@ -25,6 +25,12 @@
     "actions": "İşlemler",
     "add-employee": "Çalışan Ekle",
     "edit-employee": "Çalışanı Düzenle",
-    "edit-message": "${name} adlı çalışanı düzenliyorsunuz."
+    "edit-message": "${name} email  çalışanı düzenliyorsunuz.",
+    "select-department": "Departman Seç",
+    "select-position": "Pozisyon Seç",
+    "required": "Bu alan zorunludur",
+    "phoneFormat": "Telefon numarası +90 555 555 55 55 formatında olmalıdır",
+    "emailFormat": "E-posta adresi text@text.com formatında olmalıdır",
+    "uniqueEmail": "E-posta adresi benzersiz olmalıdır"
   }
 }

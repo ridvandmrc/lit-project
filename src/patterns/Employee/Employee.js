@@ -83,7 +83,7 @@ export default class Employee extends LitElement {
   }
 
   checkAllSelected() {
-    return this.data.every((user) => user.selected);
+    return this.data.every((user) => user?.selected);
   }
 
   onDeleteUser(user) {
@@ -287,10 +287,10 @@ export default class Employee extends LitElement {
       <my-table-group type="body">
         ${this.data.map(
           (user) =>
-            html`<my-table-row .selected=${user.selected}>
+            html`<my-table-row .selected=${user?.selected}>
               <my-table-cell>
                 <my-checkbox
-                  ?checked=${user.selected}
+                  ?checked=${user?.selected}
                   @selectChange=${(e) =>
                     this.updateRowSelection(user, e.detail)}
                 ></my-checkbox>
@@ -305,7 +305,7 @@ export default class Employee extends LitElement {
                       color="text"
                       class="ellipsis-line"
                     >
-                      ${user[userKey]}
+                      ${user?.[userKey]}
                     </my-typography>
                   </my-table-cell>`
               )}

@@ -25,6 +25,12 @@
     "actions": "Actions",
     "add-employee": "Add Employee",
     "edit-employee": "Edit Employee",
-    "edit-message": "You are editing ${name}."
+    "edit-message": "You are editing the user has ${name} email address .",
+    "select-department": "Select Department",
+    "select-position": "Select Position",
+    "required": "This field is required",
+    "phoneFormat": "Phone number must be in the format +90 555 555 55 55",
+    "emailFormat": "Email must be in the format text@text.com",
+    "uniqueEmail": "Email must be unique"
   }
 }

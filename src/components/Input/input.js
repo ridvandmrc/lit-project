@@ -5,9 +5,11 @@ class MyInput extends LitElement {
     return {
       label: { type: String },
       type: { type: String, reflect: true }, // text | password | email | number
-      value: { type: String,reflect: true },
+      value: { type: String, reflect: true },
       placeholder: { type: String },
       readonly: { type: Boolean, reflect: true },
+      error: { type: Boolean, reflect: true },
+      errorMessage: { type: String },
     };
   }
 
@@ -25,8 +27,7 @@ class MyInput extends LitElement {
   }
 
   render() {
-    return html`
-      <label for=${this.label}>${this.label}</label>
+    return html` <label for=${this.label}>${this.label}</label>
       <input
         id=${this.label}
         .value=${this.value}
@@ -41,7 +42,13 @@ class MyInput extends LitElement {
         autocomplete="off"
         placeholder=${this.placeholder}
       />
-    `;
+      <my-typography
+        class=${`error-message  ${this.error && this.errorMessage ? 'visible' : ''} `}
+        type="caption"
+        color="error"
+      >
+        ${this.errorMessage}
+      </my-typography>`;
   }
 
   static get styles() {
@@ -68,12 +75,26 @@ class MyInput extends LitElement {
         color: var(--text-color);
         outline: none;
         box-sizing: border-box;
+        transition: all 0.3s;
       }
 
       input:read-only {
         pointer-events: none;
         background-color: var(--disabled-color);
         user-select: none;
+      }
+
+      :host([error]) input {
+        border-color: var(--error-color, red);
+      }
+
+      .error-message {
+        opacity: 0;
+        margin: var(--spacing-2xsm) 0 0 var(--spacing-2xsm);
+        transition: opacity 0.3s;
+      }
+      .error-message.visible {
+        opacity: 1;
       }
     `;
   }

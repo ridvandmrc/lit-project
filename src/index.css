@@ -15,7 +15,7 @@
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
 
-  --font-size-sm: 0.5rem;
+  --font-size-sm: 0.7rem;
   --font-size-md: 0.8rem;
   --font-size-lg: 0.9rem;
   --font-size-xl: 1.2rem;
@@ -44,13 +44,13 @@ body {
   --label-color: #3f3f3f;
   --disabled-color: #bdbdbd;
   --bg-white: #fff;
+  --main-bg: #f5f5f5;
+  --error-color: #e53935; 
 
   --border-color: #ebe8e8;
   --input-border-color: #3f3f3f;
 
   --selected-bg: rgba(255, 98, 1, 0.1);
-
-  --main-bg: #f5f5f5;
 }
 
 .body-dark {
@@ -61,13 +61,14 @@ body {
   --label-color: #cccccc;
   --disabled-color: #666666;
   --bg-white: #1e1e1e;
+  --main-bg: #121212;
+  --error-color: #ef9a9a;
 
   --border-color: #333333;
   --input-border-color: #666666;
 
   --selected-bg: rgba(255, 98, 1, 0.2);
 
-  --main-bg: #121212;
 }
 
 h1 {

@@ -11,7 +11,10 @@ export default {
     }
     el.label = args.label;
     el.value = args.value;
+    el.valueList = args.valueList;
     el.placeholder = args.placeholder;
+    el.error = args.error;
+    el.errorMessage = args.errorMessage;
 
     return el;
   },
@@ -22,6 +25,8 @@ export default {
       description: 'Selected value object with label and value properties',
     },
     placeholder: 'text',
+    error: 'boolean',
+    errorMessage: 'text',
   },
   parameters: {
     docs: {
@@ -33,13 +38,19 @@ export default {
   },
 };
 
-export const Datepicker = {
+export const Select = {
   args: {
     label: 'Position',
     value: {
-      value: 'test3',
-      label: 'Test',
+      value: 'analytics',
+      label: 'Analytics',
     },
+    valueList: [
+      { value: 'analytics', label: 'Analytics' },
+      { value: 'tech', label: 'Tech' },
+    ],
     placeholder: 'Please enter Value',
+    error: true,
+    errorMessage: '',
   },
 };

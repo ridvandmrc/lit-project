@@ -13,6 +13,8 @@ export default {
     el.value = args.value;
     el.placeholder = args.placeholder;
     el.format = args.format || 'DD/MM/YYYY'; // Default format if not provided
+    el.error = args.error;
+    el.errorMessage = args.errorMessage;
 
     return el;
   },
@@ -21,6 +23,8 @@ export default {
     value: 'text',
     placeholder: 'text',
     format: 'text', // e.g., 'DD/MM/YYYY' | 'YYYY-MM-DD'
+    error: 'boolean',
+    errorMessage: 'text',
   },
   parameters: {
     docs: {
@@ -38,5 +42,7 @@ export const Datepicker = {
     value: '13/02/2022',
     placeholder: 'Please enter Value',
     format: 'DD/MM/YYYY', // Default format
+    error: false,
+    errorMessage: '',
   },
 };
