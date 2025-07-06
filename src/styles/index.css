@@ -51,6 +51,7 @@ body {
   --input-border-color: #3f3f3f;
 
   --selected-bg: rgba(255, 98, 1, 0.1);
+  --arrow-color: #4c4444;
 }
 
 .body-dark {
@@ -68,6 +69,7 @@ body {
   --input-border-color: #666666;
 
   --selected-bg: rgba(255, 98, 1, 0.2);
+  --arrow-color: #e0e0e0;
 
 }
 

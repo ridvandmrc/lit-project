@@ -10,9 +10,14 @@ import {
   updateView,
 } from '../../store';
 import { t } from '../../i18n';
+import { ComponentNames } from '../../constants';
+import { debounce, Resize } from '../../utils';
 
-const pageSize = 10; // Number of users per page
 const searchBy = ['email', 'firstName', 'lastName'];
+const PAGE_SIZE = 10; // Number of users per page
+const TABLE_BREAKPOINT = 1100;
+const GRID_TWO_COL = 1200;
+const GRID_ONE_COL = 850;
 
 export default class Employee extends LitElement {
   static get properties() {
@@ -37,15 +42,17 @@ export default class Employee extends LitElement {
       this.updatePage(this.current); // Reset to first page on data change
     });
 
-    this.observer = new ResizeObserver((e) => {
-      const currentWidth = e[0].contentBoxSize[0].inlineSize;
-      if (currentWidth < 1100) {
+    this.observer = Resize(document.body, (width) => {
+      if (width < TABLE_BREAKPOINT) {
         this.categorySize = true;
       } else {
         this.categorySize = false;
       }
     });
-    this.observer.observe(document.body);
+
+    this.debounced = debounce((e) => {
+      this.onSearchUser(e.detail);
+    });
   }
 
   disconnectedCallback() {
@@ -58,16 +65,18 @@ export default class Employee extends LitElement {
     this.current = target;
     const _targetTotal = this.searchKey
       ? employee.filter((user) =>
-          searchBy.some((key) => user[key].includes(this.searchKey))
+          searchBy.some((key) =>
+            user[key].toLowerCase().includes(this.searchKey)
+          )
         )
       : employee;
-    this.total = +Math.ceil(_targetTotal.length / pageSize).toFixed(0); // Total number of users
+    this.total = +Math.ceil(_targetTotal.length / PAGE_SIZE).toFixed(0); // Total number of users
     if (this.current > this.total) {
       this.current = this.total;
     }
     this.data = _targetTotal.slice(
-      (this.current - 1) * pageSize,
-      (this.current - 1) * pageSize + pageSize
+      (this.current - 1) * PAGE_SIZE,
+      (this.current - 1) * PAGE_SIZE + PAGE_SIZE
     );
   }
 
@@ -105,8 +114,8 @@ export default class Employee extends LitElement {
     Router.go(`/edit-employee/${user.email}`);
   }
 
-  onSearchUser(e) {
-    const _search = e.target.value.toLowerCase();
+  onSearchUser(searchKeyword) {
+    const _search = searchKeyword.toLowerCase();
     this.searchKey = _search;
     this.updatePage(1);
   }
@@ -114,46 +123,29 @@ export default class Employee extends LitElement {
   render() {
     return html`
       <my-page-layout pageTitle=${t('employee.title')}>
-        ${!this.categorySize
-          ? html`<section slot="head-actions">
-              <my-button
-                class="${this.view === 'table' ? 'selected' : 'not-selected'}"
-                variant="text"
-                color="primary"
-                size="large"
-                icon="hamburger"
-                @click="${() => this.updateView('table')}"
-              >
-              </my-button>
-              <my-button
-                class="${this.view === 'category'
-                  ? 'selected'
-                  : 'not-selected'}"
-                variant="text"
-                color="primary"
-                size="large"
-                icon="grid"
-                @click="${() => this.updateView('category')}"
-              ></my-button>
-            </section>`
-          : ''}
-
+        ${this.renderActions()}
         <section class="search">
           <my-input
-            placeholder="Search by name and email"
-            @inputChange=${this.onSearchUser}
+            placeholder=${t('employee.search')}
+            @inputChange=${this.debounced}
           ></my-input>
         </section>
         ${this.view === 'category' || this.categorySize
           ? this.categoryView()
           : this.tableView()}
-        <section class="pagination">
-          <my-pagination
-            @pageChange="${(e) => this.updatePage(e.detail.current)}"
-            total="${this.total || 1}"
-            current="${this.current || 1}"
-          ></my-pagination>
-        </section>
+        ${this.data.length
+          ? html`<section class="pagination">
+              <my-pagination
+                @pageChange="${(e) => this.updatePage(e.detail.current)}"
+                total="${this.total || 1}"
+                current="${this.current || 1}"
+              ></my-pagination>
+            </section>`
+          : html`<my-card class="empty-message">
+              <my-typography color="text">
+                ${t('common.not-found')}</my-typography
+              >
+            </my-card>`}
         <my-confirmation
           .open=${!!this.deleteUser?.firstName}
           .title=${t('employee.remove-title')}
@@ -201,13 +193,22 @@ export default class Employee extends LitElement {
         margin: var(--spacing-md) 0;
       }
 
-      @media (max-width: 1200px) {
+      .empty-message {
+        margin-top: var(--spacing-2xsm);
+        width: 100%;
+      }
+
+      .empty-message my-typography {
+        text-align: center;
+      }
+
+      @media (max-width: ${GRID_TWO_COL}px) {
         .category-view {
           grid-template-columns: repeat(2, 1fr);
         }
       }
 
-      @media (max-width: 850px) {
+      @media (max-width: ${GRID_ONE_COL}px) {
         .category-view {
           grid-template-columns: 1fr;
         }
@@ -236,6 +237,30 @@ export default class Employee extends LitElement {
         }
       }
     `;
+  }
+
+  renderActions() {
+    return !this.categorySize
+      ? html`<section slot="head-actions">
+          <my-button
+            class="${this.view === 'table' ? 'selected' : 'not-selected'}"
+            variant="text"
+            color="primary"
+            size="large"
+            icon="hamburger"
+            @click="${() => this.updateView('table')}"
+          >
+          </my-button>
+          <my-button
+            class="${this.view === 'category' ? 'selected' : 'not-selected'}"
+            variant="text"
+            color="primary"
+            size="large"
+            icon="grid"
+            @click="${() => this.updateView('category')}"
+          ></my-button>
+        </section>`
+      : '';
   }
 
   categoryView() {
@@ -365,4 +390,4 @@ export default class Employee extends LitElement {
   }
 }
 
-window.customElements.define('my-employee', Employee);
+window.customElements.define(ComponentNames.patterns.employee, Employee);

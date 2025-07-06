@@ -1,18 +1,20 @@
+import { ComponentNames } from './component.const';
+
 export const AppRoutes = {
   main: {
     path: '/',
-    component: 'my-employee',
+    component: ComponentNames.patterns.employee,
   },
   employee: {
     path: '/employee',
-    component: 'my-employee',
+    component: ComponentNames.patterns.employee,
   },
   addEmployee: {
     path: '/add-employee',
-    component: 'my-add-employee',
+    component: ComponentNames.patterns.addEmployee,
   },
   editEmployee: {
     path: '/edit-employee/:email',
-    component: 'my-add-employee',
+    component: ComponentNames.patterns.addEmployee,
   },
 };

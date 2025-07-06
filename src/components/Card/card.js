@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 export default class Card extends LitElement {
   static get properties() {
@@ -28,4 +29,4 @@ export default class Card extends LitElement {
   }
 }
 
-window.customElements.define('my-card', Card);
+window.customElements.define(ComponentNames.components.card, Card);

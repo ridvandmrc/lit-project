@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 class MyDatepicker extends LitElement {
   static get properties() {
@@ -87,17 +88,18 @@ class MyDatepicker extends LitElement {
         color: var(--text-color);
         outline: none;
         box-sizing: border-box;
+        background-color: var(--bg-white);
       }
       .input-wrapper {
         position: relative;
       }
       my-icon {
-        background-color: white;
+        background-color: var(--bg-white);
         position: absolute;
         right: 10px;
         top: 8px;
         pointer-events: none;
-        color: var(--icon-color);
+        color: var(--bg-white);
       }
 
       :host([error]) input {
@@ -116,4 +118,4 @@ class MyDatepicker extends LitElement {
   }
 }
 
-customElements.define('my-datepicker', MyDatepicker);
+customElements.define(ComponentNames.components.datePicker, MyDatepicker);

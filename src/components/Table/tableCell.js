@@ -1,4 +1,5 @@
 import { html, LitElement, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 export default class TableCell extends LitElement {
   render() {
@@ -16,4 +17,4 @@ export default class TableCell extends LitElement {
   }
 }
 
-window.customElements.define('my-table-cell', TableCell);
+window.customElements.define(ComponentNames.components.tableCell, TableCell);

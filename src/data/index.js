@@ -9,7 +9,19 @@ export const userColumns = [
   'position',
 ];
 
-export const employeeData = [{
+export const positionData = [
+  { value: 'junior', label: 'Junior' },
+  { value: 'senior', label: 'Senior' },
+  { value: 'expert', label: 'Expert' },
+];
+
+export const departmentData = [
+  { value: 'analytics', label: 'Analytics' },
+  { value: 'tech', label: 'Tech' },
+];
+
+export const employeeData = [
+  {
     firstName: 'Ahmet 1',
     lastName: 'Sourtimes',
     employmentDate: '23/09/2022',
@@ -108,7 +120,8 @@ export const employeeData = [{
     email: 'ahmet10@sourtimes.org',
     department: 'Tech',
     position: 'Junior',
-  },{
+  },
+  {
     firstName: 'Ahmet 1',
     lastName: 'Sourtimes',
     employmentDate: '23/09/2022',
@@ -207,7 +220,8 @@ export const employeeData = [{
     email: 'ahmet10@sourtimes.org',
     department: 'Tech',
     position: 'Junior',
-  },{
+  },
+  {
     firstName: 'Ahmet 1',
     lastName: 'Sourtimes',
     employmentDate: '23/09/2022',
@@ -306,7 +320,8 @@ export const employeeData = [{
     email: 'ahmet10@sourtimes.org',
     department: 'Tech',
     position: 'Junior',
-  },{
+  },
+  {
     firstName: 'Ahmet 1',
     lastName: 'Sourtimes',
     employmentDate: '23/09/2022',
@@ -405,7 +420,8 @@ export const employeeData = [{
     email: 'ahmet10@sourtimes.org',
     department: 'Tech',
     position: 'Junior',
-  },{
+  },
+  {
     firstName: 'Ahmet 1',
     lastName: 'Sourtimes',
     employmentDate: '23/09/2022',
@@ -504,7 +520,8 @@ export const employeeData = [{
     email: 'ahmet10@sourtimes.org',
     department: 'Tech',
     position: 'Junior',
-  },{
+  },
+  {
     firstName: 'Ahmet 1',
     lastName: 'Sourtimes',
     employmentDate: '23/09/2022',
@@ -603,7 +620,8 @@ export const employeeData = [{
     email: 'ahmet10@sourtimes.org',
     department: 'Tech',
     position: 'Junior',
-  },{
+  },
+  {
     firstName: 'Ahmet 1',
     lastName: 'Sourtimes',
     employmentDate: '23/09/2022',
@@ -702,7 +720,8 @@ export const employeeData = [{
     email: 'ahmet10@sourtimes.org',
     department: 'Tech',
     position: 'Junior',
-  },{
+  },
+  {
     firstName: 'Ahmet 1',
     lastName: 'Sourtimes',
     employmentDate: '23/09/2022',
@@ -801,7 +820,8 @@ export const employeeData = [{
     email: 'ahmet10@sourtimes.org',
     department: 'Tech',
     position: 'Junior',
-  },{
+  },
+  {
     firstName: 'Ahmet 1',
     lastName: 'Sourtimes',
     employmentDate: '23/09/2022',
@@ -900,7 +920,8 @@ export const employeeData = [{
     email: 'ahmet10@sourtimes.org',
     department: 'Tech',
     position: 'Junior',
-  },{
+  },
+  {
     firstName: 'Ahmet 1',
     lastName: 'Sourtimes',
     employmentDate: '23/09/2022',
@@ -999,4 +1020,5 @@ export const employeeData = [{
     email: 'ahmet10@sourtimes.org',
     department: 'Tech',
     position: 'Junior',
-  }];
+  },
+];

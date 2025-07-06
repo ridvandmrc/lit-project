@@ -1,0 +1,27 @@
+export const ComponentNames = {
+  components: {
+    backdrop: 'my-backdrop',
+    button: 'my-button',
+    card: 'my-card',
+    checkbox: 'my-checkbox',
+    confirmation: 'my-confirmation',
+    datePicker: 'my-datepicker',
+    icon: 'my-icon',
+    iconButton: 'my-icon-button',
+    input: 'my-input',
+    nav: 'my-nav',
+    pageLayout: 'my-page-layout',
+    pagination: 'my-pagination',
+    select: 'my-select',
+    table: 'my-table',
+    tableCell: 'my-table-cell',
+    tableGroup: 'my-table-group',
+    tableRow: 'my-table-row',
+    typography: 'my-typography',
+  },
+  patterns: {
+    addEmployee: 'my-add-employee',
+    employee: 'my-employee',
+    header: 'my-header',
+  },
+};

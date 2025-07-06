@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 class Confirmation extends LitElement {
   static get properties() {
@@ -83,4 +84,4 @@ class Confirmation extends LitElement {
   }
 }
 
-customElements.define('my-confirmation', Confirmation);
+customElements.define(ComponentNames.components.confirmation, Confirmation);

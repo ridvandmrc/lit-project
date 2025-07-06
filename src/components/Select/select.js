@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 class MySelect extends LitElement {
   static get properties() {
@@ -89,17 +90,18 @@ class MySelect extends LitElement {
         outline: none;
         appearance: none;
         box-sizing: border-box;
+        background-color: var(--bg-white);
       }
       .input-wrapper {
         position: relative;
       }
       my-icon {
-        background-color: white;
+        background-color: var(--bg-white);
         position: absolute;
         right: 15px;
         top: 8px;
         pointer-events: none;
-        color: var(--icon-color);
+        color: var(--arrow-color);
         transform: rotate(90deg);
       }
       :host([error]) select {
@@ -118,4 +120,4 @@ class MySelect extends LitElement {
   }
 }
 
-customElements.define('my-select', MySelect);
+customElements.define(ComponentNames.components.select, MySelect);

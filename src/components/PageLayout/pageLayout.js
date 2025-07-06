@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 export default class PageLayout extends LitElement {
   static get properties() {
@@ -36,15 +37,17 @@ export default class PageLayout extends LitElement {
         align-items: center;
         max-width: var(--max-width);
         margin: 0 auto;
+        height: 2rem;
       }
 
       .content {
         max-width: var(--max-width);
         margin: 0 auto;
         margin-top: var(--spacing-lg);
+        overflow: hidden;
       }
     `;
   }
 }
 
-window.customElements.define('my-page-layout', PageLayout);
+window.customElements.define(ComponentNames.components.pageLayout, PageLayout);

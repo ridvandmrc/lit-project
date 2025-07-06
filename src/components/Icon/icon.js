@@ -1,6 +1,7 @@
 import { css, html, LitElement, unsafeCSS } from 'lit';
 
-import font from '../../icons.css?inline';
+import font from '../../styles/icons.css?inline';
+import { ComponentNames } from '../../constants';
 
 export class Icon extends LitElement {
   static get properties() {
@@ -39,7 +40,7 @@ export class Icon extends LitElement {
         color: var(--primary-color);
       }
       .secondary {
-        color: var(--text-color);
+        color: var(--secondary-color);
       }
       .disabled {
         color: var(--disabled-color);
@@ -52,4 +53,4 @@ export class Icon extends LitElement {
   }
 }
 
-window.customElements.define('my-icon', Icon);
+window.customElements.define(ComponentNames.components.icon, Icon);

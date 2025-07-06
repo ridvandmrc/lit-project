@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 class MyCheckbox extends LitElement {
   static get properties() {
@@ -60,4 +61,4 @@ class MyCheckbox extends LitElement {
   }
 }
 
-customElements.define('my-checkbox', MyCheckbox);
+customElements.define(ComponentNames.components.checkbox, MyCheckbox);

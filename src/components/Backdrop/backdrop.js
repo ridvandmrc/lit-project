@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 class Backdrop extends LitElement {
   static get properties() {
@@ -50,4 +51,4 @@ class Backdrop extends LitElement {
   }
 }
 
-customElements.define('my-backdrop', Backdrop);
+customElements.define(ComponentNames.components.backdrop, Backdrop);

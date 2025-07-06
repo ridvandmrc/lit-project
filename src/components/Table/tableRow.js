@@ -1,4 +1,5 @@
 import { html, LitElement, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 export default class TableRow extends LitElement {
   static get properties() {
@@ -37,4 +38,4 @@ export default class TableRow extends LitElement {
   }
 }
 
-window.customElements.define('my-table-row', TableRow);
+window.customElements.define(ComponentNames.components.tableRow, TableRow);

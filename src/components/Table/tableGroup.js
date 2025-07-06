@@ -1,4 +1,5 @@
 import { html, LitElement, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 const groupType = {
   body: html`<tbody>
@@ -51,4 +52,4 @@ export default class TableGroup extends LitElement {
   }
 }
 
-window.customElements.define('my-table-group', TableGroup);
+window.customElements.define(ComponentNames.components.tableGroup, TableGroup);

@@ -1,4 +1,5 @@
 import { LitElement, css, html } from 'lit';
+import { ComponentNames } from '../../constants';
 
 const type = Object.freeze(['title', 'subtitle', 'paragraph', 'caption']);
 const color = Object.freeze(['primary', 'text', 'disabled', 'error']);
@@ -13,7 +14,7 @@ const elements = {
 export class Typography extends LitElement {
   static get properties() {
     return {
-      type: { type: String }, // title | subtitle | paragraph | caption
+      type: { type: String, reflect: true }, // title | subtitle | paragraph | caption
       color: { type: String, reflect: true }, // primary | text | disabled
     };
   }
@@ -91,4 +92,4 @@ export class Typography extends LitElement {
   }
 }
 
-window.customElements.define('my-typography', Typography);
+window.customElements.define(ComponentNames.components.typography, Typography);

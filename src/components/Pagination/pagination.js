@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 const MAX_PAGES = 10;
 const MID_THRESHOLD = 4;
@@ -95,4 +96,4 @@ export default class Pagination extends LitElement {
   }
 }
 
-window.customElements.define('my-pagination', Pagination);
+window.customElements.define(ComponentNames.components.pagination, Pagination);

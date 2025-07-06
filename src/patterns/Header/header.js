@@ -1,6 +1,6 @@
 import { Router } from '@vaadin/router';
 import { LitElement, html, css } from 'lit';
-import { AppRoutes } from '../../constants';
+import { AppRoutes, ComponentNames } from '../../constants';
 import {
   useLanguageStore,
   updateLanguage,
@@ -104,4 +104,4 @@ export class Header extends LitElement {
   }
 }
 
-window.customElements.define('my-header', Header);
+window.customElements.define(ComponentNames.patterns.header, Header);

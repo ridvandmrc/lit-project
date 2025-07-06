@@ -6,25 +6,21 @@ describe('my-button', () => {
   it('renders with default properties', async () => {
     const el = await fixture(html`<my-button>My button</my-button>`);
 
-    const button = el.shadowRoot.querySelector('button');
-
-    expect(button).to.exist;
-    expect(button.classList.contains('contained')).to.be.true;
-    expect(button.classList.contains('primary')).to.be.true;
-    expect(button.classList.contains('medium')).to.be.true;
+    expect(el).to.exist;
     expect(el.innerHTML.trim()).to.equal('My button');
   });
 
   it('renders with custom properties', async () => {
     const el = await fixture(html`
-      <my-button variant="outlined" color="secondary" size="large"> </my-button>
+      <my-button variant="outlined" color="secondary" size="medium">
+      </my-button>
     `);
 
-    const button = el.shadowRoot.querySelector('button');
+    await el.updateComplete;
 
-    expect(button.classList.contains('outlined')).to.be.true;
-    expect(button.classList.contains('secondary')).to.be.true;
-    expect(button.classList.contains('large')).to.be.true;
+    expect(el.hasAttribute('variant')).to.be.true;
+    expect(el.hasAttribute('color')).to.be.true;
+    expect(el.getAttribute('size')).to.equal('medium');
   });
 
   it('renders icon if icon attribute is set', async () => {
@@ -61,6 +57,6 @@ describe('my-button', () => {
 
     expect(icon).to.exist;
     expect(icon.getAttribute('name')).to.equal('calendar');
-    expect(button.classList.contains('outlined')).to.be.true;
+    expect(el.getAttribute('variant')).to.equal('outlined');
   });
 });

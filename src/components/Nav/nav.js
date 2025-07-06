@@ -1,4 +1,5 @@
 import { html, LitElement, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 export class Nav extends LitElement {
   render() {
@@ -32,7 +33,7 @@ export class Nav extends LitElement {
       }
 
       @media (max-width: 850px) {
-        img{
+        img {
           display: none;
         }
 
@@ -44,4 +45,4 @@ export class Nav extends LitElement {
   }
 }
 
-window.customElements.define('my-nav', Nav);
+window.customElements.define(ComponentNames.components.nav, Nav);

@@ -4,7 +4,8 @@
     "delete": "Delete",
     "proceed": "Proceed",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "not-found": "No Item found"
   },
   "header": {
     "employees": "Employees",
@@ -12,6 +13,7 @@
   },
   "employee": {
     "title": "Employee List",
+    "search": "Search by name and email",
     "remove-title": "Are you sure?",
     "remove-message": "Selected Employee record of ${name} will be removed. ",
     "firstName": "First Name",

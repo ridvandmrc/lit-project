@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 class MyInput extends LitElement {
   static get properties() {
@@ -73,6 +74,7 @@ class MyInput extends LitElement {
         border-radius: var(--radius-sm);
         font-size: var(--font-size-lg);
         color: var(--text-color);
+        background-color: var(--bg-white);
         outline: none;
         box-sizing: border-box;
         transition: all 0.3s;
@@ -100,4 +102,4 @@ class MyInput extends LitElement {
   }
 }
 
-customElements.define('my-input', MyInput);
+customElements.define(ComponentNames.components.input, MyInput);

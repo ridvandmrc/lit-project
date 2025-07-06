@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { ComponentNames } from '../../constants';
 
 export default class IconButton extends LitElement {
   static get properties() {
@@ -47,4 +48,4 @@ export default class IconButton extends LitElement {
   }
 }
 
-window.customElements.define('my-icon-button', IconButton);
+window.customElements.define(ComponentNames.components.iconButton, IconButton);
