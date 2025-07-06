@@ -1,6 +1,6 @@
 /** @type { import('@storybook/web-components-vite').Preview } */
 
-import '../src/index.css';
+import '../src/styles/index.css';
 
 export const decorators = [
   (Story) => {

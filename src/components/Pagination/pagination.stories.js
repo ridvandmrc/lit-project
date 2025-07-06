@@ -20,8 +20,8 @@ export default {
     return el;
   },
   argTypes: {
-    total: { type: Number },
-    current: { type: Number },
+    total: { type: Number, description: 'Total number of pages' },
+    current: { type: Number, description: 'Current active page' },
   },
   parameters: {
     docs: {

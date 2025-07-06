@@ -19,20 +19,29 @@ export default {
     return el;
   },
   argTypes: {
-    label: 'text',
+    label: { type: 'text', description: 'Label for the select input' },
     value: {
       control: 'object',
       description: 'Selected value object with label and value properties',
     },
-    placeholder: 'text',
-    error: 'boolean',
-    errorMessage: 'text',
+    placeholder: {
+      type: 'text',
+      description: 'Placeholder text for the select input',
+    },
+    error: {
+      type: 'boolean',
+      description: 'Indicates if there is an error in the select input',
+    },
+    errorMessage: {
+      type: 'text',
+      description: 'Error message to display when there is an error',
+    },
   },
   parameters: {
     docs: {
       description: {
         component: `
-        Select is a custom select input component built with Lit. It allows users to choose from a list of options. The component can be styled and customized with various attributes.`,
+Select is a custom select input component built with Lit. It allows users to choose from a list of options. The component can be styled and customized with various attributes.`,
       },
     },
   },

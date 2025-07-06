@@ -14,9 +14,21 @@ export default {
     return el;
   },
   argTypes: {
-    slot: 'text',
-    type: { type: 'select', options: ['title', 'paragraph', 'caption'] },
-    color: { type: 'select', options: ['primary', 'text', 'disabled'] },
+    slot: {
+      type: 'text',
+      description: 'Content to be displayed in the typography component',
+    },
+    type: {
+      type: 'select',
+      options: ['title', 'paragraph', 'caption'],
+      description:
+        'The type of typography determines its style and semantic meaning.',
+    },
+    color: {
+      type: 'select',
+      options: ['primary', 'text', 'disabled'],
+      description: 'The color of the typography determines its appearance.',
+    },
   },
   parameters: {
     docs: {

@@ -18,18 +18,31 @@ export default {
     return el;
   },
   argTypes: {
-    label: 'text',
-    value: 'text',
-    placeholder: 'text',
-    type: { type: 'select', options: ['text', 'password', 'email', 'number'] },
-    error: 'boolean',
-    errorMessage: 'text',
+    label: { type: 'text', description: 'Label for the input field' },
+    value: { type: 'text', description: 'Current value of the input field' },
+    placeholder: {
+      type: 'text',
+      description: 'Placeholder text for the input field',
+    },
+    type: {
+      type: 'select',
+      options: ['text', 'password', 'email', 'number'],
+      description: 'Type of the input field',
+    },
+    error: {
+      type: 'boolean',
+      description: 'Indicates if there is an error in the input field',
+    },
+    errorMessage: {
+      type: 'text',
+      description: 'Error message to display when there is an error',
+    },
   },
   parameters: {
     docs: {
       description: {
         component: `
-        Input is a custom input component built with Lit. It can be used to create text fields, password fields, email inputs, and number inputs. The component supports different types of inputs and can be styled with various attributes.
+Input is a custom input component built with Lit. It can be used to create text fields, password fields, email inputs, and number inputs. The component supports different types of inputs and can be styled with various attributes.
         `,
       },
     },

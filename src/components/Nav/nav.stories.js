@@ -1,5 +1,5 @@
 import './nav';
-import '../../icons.css'
+import '../../styles/icons.css'
 
 export default {
   title: 'Custom Components/Navbar',

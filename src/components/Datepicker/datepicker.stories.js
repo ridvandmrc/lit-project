@@ -19,18 +19,33 @@ export default {
     return el;
   },
   argTypes: {
-    label: 'text',
-    value: 'text',
-    placeholder: 'text',
-    format: 'text', // e.g., 'DD/MM/YYYY' | 'YYYY-MM-DD'
-    error: 'boolean',
-    errorMessage: 'text',
+    label: { type: 'text', description: 'Label for the datepicker' },
+    value: {
+      type: 'text',
+      description: 'Selected date value in the specified format',
+    },
+    placeholder: {
+      type: 'text',
+      description: 'Placeholder text for the date input',
+    },
+    format: {
+      type: 'text', // e.g., 'DD/MM/YYYY' | 'YYYY-MM-DD'
+      description: 'Date format for the input value',
+    },
+    error: {
+      type: 'boolean',
+      description: 'Indicates if there is an error in the date input',
+    },
+    errorMessage: {
+      type: 'text',
+      description: 'Error message to display when there is an error',
+    },
   },
   parameters: {
     docs: {
       description: {
         component: `
-        Datepicker is a custom date input component built with Lit. It allows users to select a date from a calendar interface. The component can be styled and customized with various attributes.`,
+Datepicker is a custom date input component built with Lit. It allows users to select a date from a calendar interface. The component can be styled and customized with various attributes.`,
       },
     },
   },

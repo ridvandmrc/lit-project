@@ -70,23 +70,17 @@ export default {
 
     return el;
   },
-  argTypes: {
-    total: { type: Number },
-    current: { type: Number },
-  },
+  argTypes: {},
   parameters: {
     docs: {
       description: {
         component: `
-        The my-table component is a custom table element that supports pagination. It displays a list of items and allows navigation through pages. The component accepts two properties: \`total\` for the total number of items and \`current\` for the current page number.`,
+The my-table component is a custom table element that supports pagination. It displays a list of items and allows navigation through pages. The component accepts two properties: \`total\` for the total number of items and \`current\` for the current page number.`,
       },
     },
   },
 };
 
 export const Table = {
-  args: {
-    total: 10,
-    current: 2,
-  },
+  args: {},
 };

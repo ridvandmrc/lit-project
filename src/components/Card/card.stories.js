@@ -14,8 +14,14 @@ export default {
     return el;
   },
   argTypes: {
-    slot: 'text',
-    selected: 'boolean',
+    slot: {
+      type: 'text',
+      description: 'Content to be displayed inside the card',
+    },
+    selected: {
+      type: 'boolean',
+      description: 'Indicates whether the card is selected or not',
+    },
   },
   parameters: {
     docs: {

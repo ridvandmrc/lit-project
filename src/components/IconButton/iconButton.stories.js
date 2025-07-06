@@ -31,13 +31,19 @@ export default {
         'chevron-right',
         'chevron-left',
       ],
+      description: 'The icon to display in the button',
     },
     color: {
       type: 'select',
       options: ['primary', 'secondary', 'disabled'],
+      description: 'The color of the button determines its appearance.',
     },
 
-    size: { type: ['select'], options: ['small', 'medium', 'large'] },
+    size: {
+      type: ['select'],
+      options: ['small', 'medium', 'large'],
+      description: 'The size of the button determines its dimensions.',
+    },
   },
   parameters: {
     docs: {

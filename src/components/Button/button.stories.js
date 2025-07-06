@@ -1,6 +1,5 @@
 import './button';
 
-
 export default {
   title: 'Custom Components/Button',
   tags: ['autodocs'],
@@ -19,9 +18,23 @@ export default {
   },
   argTypes: {
     slot: 'text',
-    variant: { type: 'select', options: ['contained', 'outlined', 'text'] }, // contained | outlined | text
-    color: { type: 'select', options: ['primary', 'secondary', 'disabled','text-color'] }, // primary | secondary | disabled | text-color
-    size: { type: 'select', options: ['small', 'medium', 'large'] }, // small | medium | large
+    variant: {
+      type: 'select',
+      options: ['contained', 'outlined', 'text'],
+      description:
+        'The variant of the button determines its style and behavior.',
+    }, // contained | outlined | text
+    color: {
+      type: 'select',
+      options: ['primary', 'secondary', 'disabled', 'text-color'],
+      description: 'The color of the button determines its appearance.',
+    }, // primary | secondary | disabled | text-color
+    size: {
+      type: 'select',
+      options: ['small', 'medium', 'large'],
+      description:
+        ' The size of the button determines its dimensions and padding.',
+    }, // small | medium | large
     icon: {
       type: 'select',
       options: [
@@ -34,6 +47,8 @@ export default {
         'trash',
         'add-user',
       ],
+      description:
+        'The icon of the button can be set to display san icon alongside the text.',
     },
   },
   parameters: {

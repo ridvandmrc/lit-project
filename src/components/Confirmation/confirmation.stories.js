@@ -22,11 +22,20 @@ export default {
     return el;
   },
   argTypes: {
-    open: 'boolean',
-    message: 'string',
-    title: 'text',
-    proceedText: 'text',
-    cancelText: 'text',
+    open: {
+      type: 'boolean',
+      description: 'Controls the visibility of the confirmation dialog',
+    },
+    message: {
+      type: 'string',
+      description: 'The message to display in the confirmation dialog',
+    },
+    title: {
+      type: 'text',
+      description: 'The title of the confirmation dialog',
+    },
+    proceedText: { type: 'text', description: 'Text for the proceed button' },
+    cancelText: { type: 'text', description: 'Text for the cancel button' },
   },
   parameters: {
     docs: {

@@ -14,7 +14,10 @@ export default {
     return el;
   },
   argTypes: {
-    slot: 'text',
+    slot: {
+      type: 'text',
+      description: 'Content to be displayed inside the backdrop',
+    },
     open: 'boolean',
   },
   parameters: {

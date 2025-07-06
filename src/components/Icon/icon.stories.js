@@ -1,5 +1,5 @@
 import './icon';
-import '../../icons.css';
+import '../../styles/icons.css';
 
 export default {
   title: 'Custom Components/Icon',
@@ -32,19 +32,24 @@ export default {
         'chevron-right',
         'chevron-left',
       ],
+      description: 'The name of the icon to display',
     },
     color: {
       type: 'select',
       options: ['primary', 'secondary', 'disabled'],
+      description: 'The color of the icon determines its appearance.',
     },
-    size: { type: ['select'], options: ['small', 'medium', 'large'] },
+    size: {
+      type: ['select'],
+      options: ['small', 'medium', 'large'],
+      description: 'The size of the icon determines its dimensions.',
+    },
   },
   parameters: {
     docs: {
       description: {
         component: `
-        This is a custom icon component built with Lit. It can be used to display icons in your application.
-
+This is a custom icon component built with Lit. It can be used to display icons in your application.
         `,
       },
     },
