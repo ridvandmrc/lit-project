@@ -20,6 +20,21 @@ describe('my-datepicker', () => {
     expect(icon.getAttribute('name')).to.equal('calendar');
   });
 
+  it('renders with error property', async () => {
+    const el = await fixture(html`
+      <my-datepicker
+        label="Date"
+        placeholder="Select date"
+        error
+        errorMessage="error"
+      ></my-datepicker>
+    `);
+
+    const err = el.shadowRoot.querySelector('.error-message');
+
+    expect(err.textContent.trim()).to.equal('error');
+  });
+
   it('test the custom events', async () => {
     const el = await fixture(html`
       <my-datepicker label="Date" format="DD/MM/YYYY"></my-datepicker>

@@ -26,10 +26,20 @@ describe('my-select', () => {
     expect(label.textContent.trim()).to.equal('Test Select');
 
     expect(select).to.exist;
-    expect(options.length).to.equal(sampleOptions.length);
+    expect(options.length).to.equal(sampleOptions.length + 1);
 
-    expect(options[1].selected).to.be.true;
-    expect(options[1].textContent.trim()).to.equal('Option 2');
+    expect(options[1].selected).to.be.false;
+    expect(options[1].textContent.trim()).to.equal('Option 1');
+  });
+
+  it('renders with error property', async () => {
+    const el = await fixture(html`
+      <my-select label="test" error errorMessage="error"></my-select>
+    `);
+
+    const err = el.shadowRoot.querySelector('.error-message');
+
+    expect(err.textContent.trim()).to.equal('error');
   });
 
   it('test custom events selectionChange', async () => {

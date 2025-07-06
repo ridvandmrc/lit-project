@@ -12,6 +12,7 @@ import {
 import { t } from '../../i18n';
 
 const pageSize = 10; // Number of users per page
+const searchBy = ['email', 'firstName', 'lastName'];
 
 export default class Employee extends LitElement {
   static get properties() {
@@ -22,6 +23,7 @@ export default class Employee extends LitElement {
       view: { type: String, state: true }, // category | table
       deleteUser: { type: Object, state: true },
       categorySize: { type: Boolean, state: true },
+      searchKey: { type: String, state: true }, // search by email and FirstName
     };
   }
 
@@ -54,11 +56,16 @@ export default class Employee extends LitElement {
   updatePage(target) {
     const { employee } = useEmployeeStore();
     this.current = target;
-    this.total = +Math.ceil(employee.length / pageSize).toFixed(0); // Total number of users
+    const _targetTotal = this.searchKey
+      ? employee.filter((user) =>
+          searchBy.some((key) => user[key].includes(this.searchKey))
+        )
+      : employee;
+    this.total = +Math.ceil(_targetTotal.length / pageSize).toFixed(0); // Total number of users
     if (this.current > this.total) {
       this.current = this.total;
     }
-    this.data = employee.slice(
+    this.data = _targetTotal.slice(
       (this.current - 1) * pageSize,
       (this.current - 1) * pageSize + pageSize
     );
@@ -98,6 +105,12 @@ export default class Employee extends LitElement {
     Router.go(`/edit-employee/${user.email}`);
   }
 
+  onSearchUser(e) {
+    const _search = e.target.value.toLowerCase();
+    this.searchKey = _search;
+    this.updatePage(1);
+  }
+
   render() {
     return html`
       <my-page-layout pageTitle=${t('employee.title')}>
@@ -124,6 +137,13 @@ export default class Employee extends LitElement {
               ></my-button>
             </section>`
           : ''}
+
+        <section class="search">
+          <my-input
+            placeholder="Search by name and email"
+            @inputChange=${this.onSearchUser}
+          ></my-input>
+        </section>
         ${this.view === 'category' || this.categorySize
           ? this.categoryView()
           : this.tableView()}
@@ -165,9 +185,8 @@ export default class Employee extends LitElement {
       }
       .category-view {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
-        justify-items: center;
       }
 
       .category-card {
@@ -178,6 +197,16 @@ export default class Employee extends LitElement {
         box-sizing: border-box;
       }
 
+      .search {
+        margin: var(--spacing-md) 0;
+      }
+
+      @media (max-width: 1200px) {
+        .category-view {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
       @media (max-width: 850px) {
         .category-view {
           grid-template-columns: 1fr;
@@ -185,6 +214,10 @@ export default class Employee extends LitElement {
 
         .category-card {
           width: 100%;
+        }
+
+        .search my-input {
+          max-width: 100%;
         }
       }
 

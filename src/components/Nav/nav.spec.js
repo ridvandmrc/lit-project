@@ -13,7 +13,7 @@ describe('my-nav', () => {
     expect(img.getAttribute('alt')).to.equal('Ing Logo'); // check alt text
 
     expect(typography).to.exist;
-    expect(typography.getAttribute('type')).to.equal('p');
+    expect(typography.getAttribute('type')).to.equal('paragraph');
     expect(typography.getAttribute('color')).to.equal('text');
     expect(typography.textContent.trim()).to.equal('ING'); // check brand
 

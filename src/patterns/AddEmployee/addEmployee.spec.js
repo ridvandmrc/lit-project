@@ -43,9 +43,26 @@ describe('addEmployee component', () => {
     expect(el.userDetail.firstName).to.equal('New');
   });
 
-  it('check save button', () => {
+  it('check save button should not be worked', () => {
     el.isUpdate = true;
     el.userDetail = { email: 'a@ex.com' };
+    el.onSave();
+
+    expect(Router.go).not.toHaveBeenCalledWith(AppRoutes.main.path);
+  });
+
+  it('check save button should be worked', () => {
+    el.isUpdate = true;
+    el.userDetail = {
+      firstName: 'Ahmet 1',
+      lastName: 'Sourtimes',
+      employmentDate: '23/09/2022',
+      birthDate: '23/09/2022',
+      phone: '+90 555 555 55 55',
+      email: 'ahmet1@sourtimes.org',
+      department: 'Tech',
+      position: 'Junior',
+    };
     el.onSave();
 
     expect(Router.go).toHaveBeenCalledWith(AppRoutes.main.path);

@@ -15,6 +15,12 @@ describe('Employee', () => {
         },
       };
     });
+
+    global.ResizeObserver = class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    };
     el = await fixture(html`<my-employee></my-employee>`);
   });
 

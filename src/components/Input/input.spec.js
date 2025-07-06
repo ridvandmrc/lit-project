@@ -40,6 +40,16 @@ describe('my-input', () => {
     expect(input.value).to.equal('test@example.com');
   });
 
+  it('renders with error property', async () => {
+    const el = await fixture(html`
+      <my-input label="test" error errorMessage="error"></my-input>
+    `);
+
+    const err = el.shadowRoot.querySelector('.error-message');
+
+    expect(err.textContent.trim()).to.equal('error');
+  });
+
   it('test custom events', async () => {
     const el = await fixture(html`<my-input label="Name"></my-input>`);
 
