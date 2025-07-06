@@ -146,6 +146,11 @@ Below are some screenshots demonstrating the UI and key features of the project:
 </p>
 
 <p align="center">
+  <img src=".readme/bulk-delete.png" alt="Light Theme" width="45%" />
+  <img src=".readme/bulk-delete-2.png" alt="Dark Theme" width="45%" />
+</p>
+
+<p align="center">
   <img src=".readme/add.png" alt="Light Theme" width="45%" />
   <img src=".readme/add-mobile.png" alt="Dark Theme" width="45%" />
 </p>

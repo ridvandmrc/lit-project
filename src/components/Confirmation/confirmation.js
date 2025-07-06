@@ -78,7 +78,7 @@ class Confirmation extends LitElement {
         height: 36px;
       }
       my-card {
-        min-width: 400px;
+        min-width: 300px;
       }
     `;
   }

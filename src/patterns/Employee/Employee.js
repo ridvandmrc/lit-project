@@ -29,6 +29,7 @@ export default class Employee extends LitElement {
       deleteUser: { type: Object, state: true },
       categorySize: { type: Boolean, state: true },
       searchKey: { type: String, state: true }, // search by email and FirstName
+      showBulkDelete: { type: Boolean, state: true },
     };
   }
 
@@ -120,6 +121,20 @@ export default class Employee extends LitElement {
     this.updatePage(1);
   }
 
+  getSelected() {
+    return this.data.filter(({ selected }) => selected);
+  }
+
+  bulkDelete() {
+    this.showBulkDelete = true;
+  }
+  proceedBulkDelete() {
+    this.getSelected().forEach(({ email }) => removeEmployee(email));
+  }
+  cancelBulkDelete() {
+    this.showBulkDelete = false;
+  }
+
   render() {
     return html`
       <my-page-layout pageTitle=${t('employee.title')}>
@@ -129,6 +144,17 @@ export default class Employee extends LitElement {
             placeholder=${t('employee.search')}
             @inputChange=${this.debounced}
           ></my-input>
+          ${this.getSelected().length
+            ? html`<my-button
+                class="bulk-delete"
+                icon="trash"
+                @click=${this.bulkDelete}
+              >
+                ${t('employee.bulk-delete', {
+                  size: this.getSelected().length,
+                })}
+              </my-button>`
+            : ''}
         </section>
         ${this.view === 'category' || this.categorySize
           ? this.categoryView()
@@ -158,6 +184,17 @@ export default class Employee extends LitElement {
           })}
         >
         </my-confirmation>
+        <my-confirmation
+          .open=${this.showBulkDelete}
+          .title=${t('employee.remove-title')}
+          .proceedText=${t('common.proceed')}
+          .cancelText=${t('common.cancel')}
+          @proceed=${this.proceedBulkDelete}
+          @cancel=${this.cancelBulkDelete}
+          message=${t('employee.bulk-message', {
+            size: this.getSelected().length,
+          })}
+        ></my-confirmation>
       </my-page-layout>
     `;
   }
@@ -191,6 +228,20 @@ export default class Employee extends LitElement {
 
       .search {
         margin: var(--spacing-md) 0;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+      }
+
+      .search my-input {
+        width: 100%;
+        max-width: 20rem;
+      }
+
+      .bulk-delete {
+        width: 100%;
+
+        max-width: 15rem;
       }
 
       .empty-message {

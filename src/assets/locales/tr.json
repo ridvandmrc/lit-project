@@ -14,6 +14,8 @@
   "employee": {
     "title": "Çalışan Listesi",
     "search": "Ad ve e-posta ile ara",
+    "bulk-delete": "(${size}) Çalışan Sil",
+    "bulk-message": "(${size}) çalışan siliniyor!!",
     "remove-title": "Emin misiniz?",
     "remove-message": "Seçilen ${name} adlı çalışanın kaydı silinecek.",
     "firstName": "Ad",
